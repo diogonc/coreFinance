@@ -1,3 +1,4 @@
+using System;
 using financeApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -19,6 +20,19 @@ namespace financeApi.Repositories
 
             var database = client.GetDatabase("finance");
             _collection = database.GetCollection<User>("user");
+        }
+
+        public bool Exists(string username, string password, string propertyUuid)
+        {
+            var builder = Builders<User>.Filter;
+            var filter = builder.Eq(u => u.Username, username) 
+                         & builder.Eq(u => u.Password, password)
+                         & builder.Eq(u => u.PropertyUuid, propertyUuid);
+
+
+            var cursor = _collection.Find(filter).ToListAsync();
+            cursor.Wait();
+            return cursor.Result.Count > 0;
         }
     }
 }

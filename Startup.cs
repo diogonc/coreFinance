@@ -1,3 +1,4 @@
+using financeApi.Midlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -35,7 +36,8 @@ namespace financeApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
+            app.UseMiddleware<AuthMiddleware>();
+            app.UseMvc();            
         }
     }
 }
