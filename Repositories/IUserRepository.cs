@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using financeApi.Models;
 
 namespace financeApi.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
-        IEnumerable<User> GetAll();
     }
 }
