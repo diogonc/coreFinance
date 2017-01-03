@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using financeApi.Models;
 using financeApi.Repositories;
+using System.Linq;
 
 namespace financeApi.Controllers
 {
@@ -16,9 +16,9 @@ namespace financeApi.Controllers
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<string> Get()
         {
-            return _userRepository.GetAll();
+            return _userRepository.GetAll().Select(u => u.Username);
         }
 
         // GET api/values/5
