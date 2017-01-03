@@ -1,32 +1,24 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using financeApi.Models;
-using MongoDB.Bson;
-using MongoDB.Driver;
-
+using financeApi.Repositories;
 
 namespace financeApi.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private IMongoCollection<User> user;
-
-        public ValuesController(MongoClient client)
+        private IUserRepository _userRepository;
+        public ValuesController(IUserRepository userRepository)
         {
-            var database = client.GetDatabase("finance");
-            user = database.GetCollection<User>(nameof(user));
+            _userRepository = userRepository;
         }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<User> Get()
         {
-            var allUserCursor = user.Find(FilterDefinition<User>.Empty).ToListAsync();
-            allUserCursor.Wait();
-            return allUserCursor.Result;
+            return _userRepository.GetAll();
         }
 
         // GET api/values/5
