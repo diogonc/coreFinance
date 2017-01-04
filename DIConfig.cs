@@ -1,5 +1,4 @@
 using financeApi.Repositories;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace financeApi

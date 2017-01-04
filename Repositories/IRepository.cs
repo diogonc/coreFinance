@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using financeApi.Models;
 
 namespace financeApi.Repositories
 {
-    public interface IRepository<T> where T : BaseModel
+    public interface IRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
-        IEnumerable<T> GetAll(string propertyUuid);
     }
 }

@@ -16,8 +16,8 @@ namespace financeApi.Repositories
                 cm.GetMemberMap(t => t.Payed).SetElementName("payed");
                 cm.GetMemberMap(t => t.Date).SetElementName("date");
                 cm.GetMemberMap(t => t.Value).SetElementName("value");
-                cm.GetMemberMap(t => t.Category).SetElementName("category");
-                cm.GetMemberMap(t => t.Account).SetElementName("account");
+                // cm.GetMemberMap(t => t.Category).SetElementName("category");
+                // cm.GetMemberMap(t => t.Account).SetElementName("account");
                 cm.GetMemberMap(t => t.PropertyUuid).SetElementName("propertyUuid");
             });
 
