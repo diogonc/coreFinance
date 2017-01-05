@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using financeApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -21,16 +20,6 @@ namespace financeApi.Repositories
 
             var database = client.GetDatabase("finance");
             _collection = database.GetCollection<Category>("category");
-        }
-
-        public IEnumerable<Category> GetAll(string propertyUuid)
-        {
-            var builder = Builders<Category>.Filter;
-            var filter = builder.Eq(c => c.PropertyUuid, propertyUuid);
-
-            var cursor = _collection.Find(filter).ToListAsync();
-            cursor.Wait();
-            return cursor.Result;
         }
     }
 }
