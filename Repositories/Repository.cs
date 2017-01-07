@@ -26,9 +26,13 @@ namespace financeApi.Repositories
             return cursor.Result;
         }
 
-        public T Get(string uuid)
+        public T Get(string uuid, string propertyUuid)
         {
-            var cursor = _collection.Find(Builders<T>.Filter.Eq(model => model.Uuid, uuid)).ToListAsync();
+            var builder = Builders<T>.Filter;
+            var filter = builder.Eq(model => model.PropertyUuid, propertyUuid)
+                         & builder.Eq(model => model.Uuid, uuid);
+
+            var cursor = _collection.Find(filter).ToListAsync();
             cursor.Wait();
             return cursor.Result.FirstOrDefault();
         }
@@ -43,9 +47,13 @@ namespace financeApi.Repositories
             _collection.ReplaceOneAsync(Builders<T>.Filter.Eq(m => m.Uuid, model.Uuid), model);
         }
 
-        public void Delete(string uuid)
+        public void Delete(string uuid, string propertyUuid)
         {
-            _collection.DeleteOneAsync(Builders<T>.Filter.Eq(model => model.Uuid, uuid));
+            var builder = Builders<T>.Filter;
+            var filter = builder.Eq(model => model.PropertyUuid, propertyUuid)
+                         & builder.Eq(model => model.Uuid, uuid);
+
+            _collection.DeleteOneAsync(filter);
         }
     }
 }

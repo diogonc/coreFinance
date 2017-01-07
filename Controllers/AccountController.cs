@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using financeApi.Repositories;
 using financeApi.Models;
+using System;
 
 namespace financeApi.Controllers
 {
@@ -9,31 +10,34 @@ namespace financeApi.Controllers
     public class AccountController : Controller
     {
         private IAccountRepository _accountRepository;
-        
+
         public AccountController(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }
 
-        // GET api/values
-        [HttpGet("{propertyUuid}")]
-        public IEnumerable<Account> Get(string propertyUuid)
+        // GET api/account
+        [HttpGet("")]
+        public IEnumerable<Account> Get()
         {
+            var propertyUuid = Request.Headers["propertyuuid"];
             return _accountRepository.GetAll(propertyUuid);
         }
 
         // GET api/values/5
-        [HttpGet("{propertyUuid}/{uuid}")]
-        public Account Get(string propertyUuid, string uuid)
+        [HttpGet("{uuid}")]
+        public Account Get(string uuid)
         {
-            return _accountRepository.Get(uuid);
+            var propertyUuid = Request.Headers["propertyuuid"];
+            return _accountRepository.Get(uuid, propertyUuid);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]Account account)
+        public void Post([FromBody]string Name)
         {
-            _accountRepository.Create(account);
+            var guid = Guid.NewGuid();
+            //_accountRepository.Create(account);
         }
 
         // PUT api/values/5
@@ -47,7 +51,8 @@ namespace financeApi.Controllers
         [HttpDelete("{uuid}")]
         public void Delete(string uuid)
         {
-            _accountRepository.Delete(uuid);
+            var propertyUuid = Request.Headers["propertyuuid"];
+            _accountRepository.Delete(uuid, propertyUuid);
         }
     }
 }
