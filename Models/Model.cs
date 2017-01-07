@@ -1,8 +1,8 @@
 namespace financeApi.Models
 {
-    public class Model
+    public interface Model
     {
-        public string Uuid { get; set; }
-        public string PropertyUuid { get; set; }
+        string Uuid { get; set; }
+        string PropertyUuid { get; set; }
     }
 }

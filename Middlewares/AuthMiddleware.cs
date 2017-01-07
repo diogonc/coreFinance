@@ -21,13 +21,18 @@ namespace financeApi.Midlewares
             var token = context.Request.Headers["token"];
             var propertyuuid = context.Request.Headers["propertyuuid"];
 
-            if (!_userRepository.Exists(username, token, propertyuuid))
+            if (IsNull(username, token, propertyuuid) || !_userRepository.Exists(username, token, propertyuuid))
             {
                 context.Response.StatusCode = 401; 
                 return;
             }
 
             await _next.Invoke(context);
+        }
+
+        private bool IsNull(string username, string token, string propertyuuid)
+        {
+            return username == null || token == null || propertyuuid == null;
         }
     }
 }

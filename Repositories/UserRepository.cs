@@ -1,3 +1,4 @@
+using System.Linq;
 using financeApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
