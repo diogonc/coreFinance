@@ -31,7 +31,7 @@ namespace financeApi.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]CategoryViewModel categoryViewModel)
+        public string Post([FromBody]CategoryViewModel categoryViewModel)
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
             var category = new Category(categoryViewModel.PropertyUuid, 
@@ -39,6 +39,7 @@ namespace financeApi.Controllers
                                         categoryViewModel.CategoryType, 
                                         categoryViewModel.Priority);
             _categoryRepository.Create(category);
+            return category.Uuid;
         }
 
         [HttpPut("{uuid}")]
@@ -48,6 +49,7 @@ namespace financeApi.Controllers
             var category = new Category(uuid, 
                                         categoryViewModel.PropertyUuid, 
                                         categoryViewModel.Name, 
+                                        categoryViewModel.CategoryType, 
                                         categoryViewModel.Priority);
             _categoryRepository.Update(category);
         }

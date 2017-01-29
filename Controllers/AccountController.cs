@@ -31,11 +31,12 @@ namespace financeApi.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]AccountViewModel accountViewModel)
+        public string Post([FromBody]AccountViewModel accountViewModel)
         {
             accountViewModel.PropertyUuid = Request.Headers["propertyuuid"];
             var account = new Account(accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority);
             _accountRepository.Create(account);
+            return account.Uuid;
         }
 
         [HttpPut("{uuid}")]

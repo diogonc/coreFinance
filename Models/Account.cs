@@ -20,7 +20,7 @@ namespace financeApi.Models
         public Account(string propertyUuid, string name, int priority)
         {
             Uuid = Guid.NewGuid().ToString();
-            PropertyUuid = propertyUuid;
+            PropertyUuid = propertyUuid;    
             Name = name;
             Priority = priority;
         }

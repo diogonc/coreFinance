@@ -1,50 +1,90 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using financeApi.Repositories;
-using System.Linq;
+using financeApi.Models;
+using financeApi.ViewModels;
 
 namespace financeApi.Controllers
 {
     [Route("api/[controller]")]
     public class TransactionController : Controller
     {
-        private IUserRepository _userRepository;
-        
-        public TransactionController(IUserRepository userRepository)
+        private ITransactionRepository _transactionRepository;
+        private IAccountRepository _accountRepository;
+        private ICategoryRepository _categoryRepository;
+
+        public TransactionController(ITransactionRepository transactionRepository,
+                                     IAccountRepository accountRepository,
+                                     ICategoryRepository categoryRepository)
         {
-            _userRepository = userRepository;
+            _transactionRepository = transactionRepository;
+            _accountRepository = accountRepository;
+            _categoryRepository = categoryRepository;
         }
 
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("")]
+        public IEnumerable<Transaction> Get()
         {
-            return _userRepository.GetAll().Select(u => u.Username);
+            var propertyUuid = Request.Headers["propertyuuid"];
+            return _transactionRepository.GetAll(propertyUuid);
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{uuid}")]
+        public Transaction Get(string uuid)
         {
-            return "value";
+            var propertyUuid = Request.Headers["propertyuuid"];
+            return _transactionRepository.Get(uuid, propertyUuid);
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public string Post([FromBody]TransactionViewModel transactionViewModel)
         {
+            transactionViewModel.PropertyUuid = Request.Headers["propertyuuid"];
+            
+            var account = _accountRepository.Get(transactionViewModel.AccountUuid,
+                                                 transactionViewModel.PropertyUuid);
+
+            var category = _categoryRepository.Get(transactionViewModel.CategoryUuid,
+                                                   transactionViewModel.PropertyUuid);
+            
+            var transaction = new Transaction(transactionViewModel.PropertyUuid, 
+                                              transactionViewModel.Date, 
+                                              transactionViewModel.Description, 
+                                              transactionViewModel.Value,
+                                              account,
+                                              category);
+
+            _transactionRepository.Create(transaction);
+            return transaction.Uuid;
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut("{uuid}")]
+        public void Put(string uuid, [FromBody]TransactionViewModel transactionViewModel)
         {
+            transactionViewModel.PropertyUuid = Request.Headers["propertyuuid"];
+
+            var account = _accountRepository.Get(transactionViewModel.AccountUuid,
+                                                 transactionViewModel.PropertyUuid);
+
+            var category = _categoryRepository.Get(transactionViewModel.CategoryUuid,
+                                                   transactionViewModel.PropertyUuid);
+            
+            var transaction = new Transaction(uuid, 
+                                        transactionViewModel.PropertyUuid, 
+                                        transactionViewModel.Date, 
+                                        transactionViewModel.Description, 
+                                        transactionViewModel.Value,
+                                        account,
+                                        category);
+
+            _transactionRepository.Update(transaction);
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{uuid}")]
+        public void Delete(string uuid)
         {
+            var propertyUuid = Request.Headers["propertyuuid"];
+            _transactionRepository.Delete(uuid, propertyUuid);
         }
     }
 }
