@@ -16,13 +16,12 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "MongoDB.Driver": "2.4.0"
+    "MongoDB.Driver": "2.4.0",
+    "Microsoft.AspNetCore.Cors": "1.1.0"
   },
-
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final"
   },
-
   "frameworks": {
     "netcoreapp1.1": {
       "imports": [
@@ -31,18 +30,15 @@
       ]
     }
   },
-
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
   },
-
   "runtimeOptions": {
     "configProperties": {
       "System.GC.Server": true
     }
   },
-
   "publishOptions": {
     "include": [
       "wwwroot",
@@ -51,11 +47,11 @@
       "web.config"
     ]
   },
-
   "scripts": {
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+    "postpublish": [
+      "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
+    ]
   },
-
   "tooling": {
     "defaultNamespace": "financeApi"
   }

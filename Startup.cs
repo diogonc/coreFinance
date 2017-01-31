@@ -28,6 +28,7 @@ namespace financeApi
             services.AddMvc();
             services.AddMongo(Configuration.GetSection("Mongo"));
             services.AddDIConfig();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,8 +37,14 @@ namespace financeApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200", "http://diogonc.github.io",  "https://diogonc.github.io")
+                                          .AllowAnyMethod()
+                                          .WithHeaders("origin", "content-type", "accept", "username",
+                                                       "token", "propertyUuid")
+            );
+
             app.UseMiddleware<AuthMiddleware>();
-            app.UseMvc();            
+            app.UseMvc();
         }
     }
 }
