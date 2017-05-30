@@ -1,0 +1,18 @@
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Infra.deps.json
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Infra.dll
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Infra.pdb
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Domain.dll
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Domain.pdb
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/obj/Debug/netcoreapp1.1/Infra.csprojResolveAssemblyReference.cache
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/obj/Debug/netcoreapp1.1/Infra.AssemblyInfo.cs
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/obj/Debug/netcoreapp1.1/Infra.dll
+c:/users/diogo/documents/visual studio 2017/Projects/CoreFinance/Infra/obj/Debug/netcoreapp1.1/Infra.pdb
+/home/diogo/projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Infra.deps.json
+/home/diogo/projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Infra.dll
+/home/diogo/projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Infra.pdb
+/home/diogo/projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Domain.dll
+/home/diogo/projects/CoreFinance/Infra/bin/Debug/netcoreapp1.1/Domain.pdb
+/home/diogo/projects/CoreFinance/Infra/obj/Debug/netcoreapp1.1/Infra.csprojResolveAssemblyReference.cache
+/home/diogo/projects/CoreFinance/Infra/obj/Debug/netcoreapp1.1/Infra.AssemblyInfo.cs
+/home/diogo/projects/CoreFinance/Infra/obj/Debug/netcoreapp1.1/Infra.dll
+/home/diogo/projects/CoreFinance/Infra/obj/Debug/netcoreapp1.1/Infra.pdb

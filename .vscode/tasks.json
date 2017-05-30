@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}/project.json"
+                "${workspaceRoot}/CoreFinance/CoreFinance.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
