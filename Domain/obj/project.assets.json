@@ -7042,16 +7042,16 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/diogo/projects/CoreFinance/Domain/Domain.csproj",
+      "projectUniqueName": "/home/diogo/projects/coreFinance/Domain/Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "/home/diogo/projects/CoreFinance/Domain/Domain.csproj",
-      "outputPath": "/home/diogo/projects/CoreFinance/Domain/obj/",
+      "projectPath": "/home/diogo/projects/coreFinance/Domain/Domain.csproj",
+      "outputPath": "/home/diogo/projects/coreFinance/Domain/obj/",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/Domain.dll": "/home/diogo/projects/CoreFinance/Domain/bin/placeholder/netcoreapp1.1/Domain.dll"
+        "lib/netcoreapp1.1/Domain.dll": "/home/diogo/projects/coreFinance/Domain/bin/placeholder/netcoreapp1.1/Domain.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {

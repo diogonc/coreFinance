@@ -7394,22 +7394,22 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/diogo/projects/CoreFinance/Infra/Infra.csproj",
+      "projectUniqueName": "/home/diogo/projects/coreFinance/Infra/Infra.csproj",
       "projectName": "Infra",
-      "projectPath": "/home/diogo/projects/CoreFinance/Infra/Infra.csproj",
-      "outputPath": "/home/diogo/projects/CoreFinance/Infra/obj/",
+      "projectPath": "/home/diogo/projects/coreFinance/Infra/Infra.csproj",
+      "outputPath": "/home/diogo/projects/coreFinance/Infra/obj/",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/Infra.dll": "/home/diogo/projects/CoreFinance/Infra/bin/placeholder/netcoreapp1.1/Infra.dll"
+        "lib/netcoreapp1.1/Infra.dll": "/home/diogo/projects/coreFinance/Infra/bin/placeholder/netcoreapp1.1/Infra.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "/home/diogo/projects/CoreFinance/Domain/Domain.csproj": {
-              "projectPath": "/home/diogo/projects/CoreFinance/Domain/Domain.csproj"
+            "/home/diogo/projects/coreFinance/Domain/Domain.csproj": {
+              "projectPath": "/home/diogo/projects/coreFinance/Domain/Domain.csproj"
             }
           }
         }

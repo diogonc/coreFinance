@@ -9777,7 +9777,8 @@
       "Infra >= 1.0.0",
       "Microsoft.AspNetCore >= 1.1.2",
       "Microsoft.AspNetCore.Mvc >= 1.1.3",
-      "Microsoft.NETCore.App >= 1.1.2"
+      "Microsoft.NETCore.App >= 1.1.2",
+      "MongoDB.Driver >= 2.4.3"
     ]
   },
   "packageFolders": {
@@ -9786,25 +9787,25 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/diogo/projects/CoreFinance/CoreFinance/CoreFinance.csproj",
+      "projectUniqueName": "/home/diogo/projects/coreFinance/CoreFinance/CoreFinance.csproj",
       "projectName": "CoreFinance",
-      "projectPath": "/home/diogo/projects/CoreFinance/CoreFinance/CoreFinance.csproj",
-      "outputPath": "/home/diogo/projects/CoreFinance/CoreFinance/obj/",
+      "projectPath": "/home/diogo/projects/coreFinance/CoreFinance/CoreFinance.csproj",
+      "outputPath": "/home/diogo/projects/coreFinance/CoreFinance/obj/",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/CoreFinance.dll": "/home/diogo/projects/CoreFinance/CoreFinance/bin/placeholder/netcoreapp1.1/CoreFinance.dll"
+        "lib/netcoreapp1.1/CoreFinance.dll": "/home/diogo/projects/coreFinance/CoreFinance/bin/placeholder/netcoreapp1.1/CoreFinance.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "/home/diogo/projects/CoreFinance/Domain/Domain.csproj": {
-              "projectPath": "/home/diogo/projects/CoreFinance/Domain/Domain.csproj"
+            "/home/diogo/projects/coreFinance/Domain/Domain.csproj": {
+              "projectPath": "/home/diogo/projects/coreFinance/Domain/Domain.csproj"
             },
-            "/home/diogo/projects/CoreFinance/Infra/Infra.csproj": {
-              "projectPath": "/home/diogo/projects/CoreFinance/Infra/Infra.csproj"
+            "/home/diogo/projects/coreFinance/Infra/Infra.csproj": {
+              "projectPath": "/home/diogo/projects/coreFinance/Infra/Infra.csproj"
             }
           }
         }
@@ -9824,6 +9825,10 @@
           "Microsoft.AspNetCore.Mvc": {
             "target": "Package",
             "version": "1.1.3"
+          },
+          "MongoDB.Driver": {
+            "target": "Package",
+            "version": "2.4.3"
           }
         }
       }
