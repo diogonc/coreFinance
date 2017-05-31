@@ -15,6 +15,10 @@ namespace Domus.ControleDeSaldo.WebApi.Filtros
 
             var errorMessage = context.Exception.Message.Replace("\r\n", ",");
             errorMessage = errorMessage.Substring(0, errorMessage.Length - 1);
+
+            context.Result = new JsonResult(errorMessage);
+
+            base.OnException(context);
         }
     }
 }
