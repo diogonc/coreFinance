@@ -21,11 +21,11 @@ namespace CoreFinance.Middleware{
             var token = context.Request.Headers["token"];
             var propertyuuid = context.Request.Headers["propertyuuid"];
 
-            // if (IsNull(username, token, propertyuuid) || !_userRepository.Exists(username, token, propertyuuid))
-            // {
-            //     context.Response.StatusCode = 401; 
-            //     return;
-            // }
+            if (IsNull(username, token, propertyuuid) || !_userRepository.Exists(username, token, propertyuuid))
+            {
+                context.Response.StatusCode = 401; 
+                return;
+            }
 
             await _next.Invoke(context);
         }
