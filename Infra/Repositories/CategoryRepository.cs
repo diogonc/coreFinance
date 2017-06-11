@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Categories;
 using Domain.Repositories;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;

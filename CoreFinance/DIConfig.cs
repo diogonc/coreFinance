@@ -1,3 +1,4 @@
+using Domain.Categories;
 using Domain.Repositories;
 using Infra.Repositories;
 using Microsoft.Extensions.DependencyInjection;

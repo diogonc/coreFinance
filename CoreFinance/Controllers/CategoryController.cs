@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Domain.Repositories;
 using Domain;
 using CoreFinance.ViewModels;
+using Domain.Categories;
 
 namespace CoreFinance.Controllers
 {
@@ -24,21 +25,25 @@ namespace CoreFinance.Controllers
         }
 
         [HttpGet("{uuid}")]
-        public Category Get(string uuid)
+        public ActionResult Get(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
-            return _categoryRepository.Get(uuid, propertyUuid);
+            var category =  _categoryRepository.Get(uuid, propertyUuid);
+            return Ok(category);
         }
 
         [HttpPost]
         public string Post([FromBody]CategoryViewModel categoryViewModel)
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
+            
             var category = new Category(categoryViewModel.PropertyUuid,
                                         categoryViewModel.Name,
-                                        categoryViewModel.CategoryType,
+                                        (CategoryType)categoryViewModel.CategoryType,
+                                        (CategoryNeed)categoryViewModel.CategoryNeed,
                                         categoryViewModel.Priority);
             _categoryRepository.Create(category);
+
             return category.Uuid;
         }
 
@@ -46,11 +51,12 @@ namespace CoreFinance.Controllers
         public void Put(string uuid, [FromBody]CategoryViewModel categoryViewModel)
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var category = new Category(uuid,
-                                        categoryViewModel.PropertyUuid,
-                                        categoryViewModel.Name,
-                                        categoryViewModel.CategoryType,
-                                        categoryViewModel.Priority);
+            var category = _categoryRepository.Get(uuid, categoryViewModel.PropertyUuid);
+            category.Update(categoryViewModel.Name,
+                            (CategoryType) categoryViewModel.CategoryType,
+                            (CategoryNeed) categoryViewModel.CategoryNeed,
+                            categoryViewModel.Priority);
+
             _categoryRepository.Update(category);
         }
 

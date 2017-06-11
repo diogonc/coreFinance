@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Categories;
 
 namespace Domain
 {
@@ -29,7 +30,7 @@ namespace Domain
             AccountName = account.Name;
             CategoryUuid = category.Uuid;
             CategoryName = category.Name;
-            CategoryType = category.CategoryType;
+            CategoryType = category.CategoryType.ToDescription();
         }
 
         public Transaction(string uuid, string propertyUuid, DateTime date, string description, decimal value,
@@ -45,7 +46,7 @@ namespace Domain
             AccountName = account.Name;
             CategoryUuid = category.Uuid;
             CategoryName = category.Name;
-            CategoryType = category.CategoryType;
+            CategoryType = category.CategoryType.ToDescription();
         }
     }
 }
