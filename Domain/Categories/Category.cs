@@ -11,7 +11,6 @@ namespace Domain.Categories
         public string Name { get; private set; }
         public int Priority { get; private set; }
         public CategoryNeed CategoryNeed { get; private set; }
-        public Category Parent {get; private set;}
 
         public Category(string propertyUuid, string name, CategoryType categoryType, CategoryNeed categoryNeed, int priority, Category parent = null)
         {
