@@ -38,7 +38,7 @@ namespace CoreFinance.Controllers
         {
             var categories = _categoryRepository.GetAll();
             var accounts = _accountRepository.GetAll();
-            var transactions = _transactionRepository.GetAll();
+            var transactions = _migration.GetAllTransactionsToMigrate();
 
             return Ok(new {categories, accounts, transactions});
         }
