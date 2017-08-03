@@ -7,6 +7,7 @@ using System.Linq;
 using MongoDB.Bson.Serialization;
 
 using System;
+using MongoDB.Bson;
 
 namespace Migration
 {
@@ -45,7 +46,7 @@ namespace Migration
 
         public IEnumerable<TransactionToMigrate> GetAllTransactionsToMigrate()
         {
-            var cursor = _collection.Find(FilterDefinition<TransactionToMigrate>.Empty).ToListAsync();
+            var cursor = _collection.Find(Builders<TransactionToMigrate>.Filter.Eq("category", BsonNull.Value)).ToListAsync();
             cursor.Wait();
             return cursor.Result;
         }
