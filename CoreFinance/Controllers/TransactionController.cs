@@ -41,10 +41,10 @@ namespace CoreFinance.Controllers
         {
             transactionViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var account = _accountRepository.Get(transactionViewModel.AccountUuid,
+            var account = _accountRepository.Get(transactionViewModel.Account.Uuid,
                                                  transactionViewModel.PropertyUuid);
 
-            var category = _categoryRepository.Get(transactionViewModel.CategoryUuid,
+            var category = _categoryRepository.Get(transactionViewModel.Category.Uuid,
                                                    transactionViewModel.PropertyUuid);
 
             var transaction = new Transaction(transactionViewModel.PropertyUuid,
@@ -63,10 +63,10 @@ namespace CoreFinance.Controllers
         {
             transactionViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var account = _accountRepository.Get(transactionViewModel.AccountUuid,
+            var account = _accountRepository.Get(transactionViewModel.Account.Uuid,
                                                  transactionViewModel.PropertyUuid);
 
-            var category = _categoryRepository.Get(transactionViewModel.CategoryUuid,
+            var category = _categoryRepository.Get(transactionViewModel.Category.Uuid,
                                                    transactionViewModel.PropertyUuid);
 
             var transaction = new Transaction(uuid,

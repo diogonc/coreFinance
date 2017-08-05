@@ -25,6 +25,7 @@ namespace Domain
             Value = value;
             PropertyUuid = propertyUuid;
             Account = account;
+            Category = category;
         }
 
         public Transaction(string uuid, string propertyUuid, DateTime date, string description, decimal value,
