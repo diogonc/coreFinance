@@ -41,7 +41,5 @@ namespace Domain.Categories
                                .When(name == null, "Nome é obrigatório")
                                .Thwros();
         }
-
-        
     }
 }

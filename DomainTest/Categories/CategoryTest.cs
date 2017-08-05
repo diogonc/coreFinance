@@ -20,6 +20,7 @@ namespace DomainTest.Categories
         public void ShouldValidateParameters()
         {
             var exception = Assert.Throws<DomainException<Category>>(() => new Category(null, null, CategoryType.Credit, CategoryNeed.Util, 3));
+            
             Assert.Equal("Propriedade é obrigatória\nNome é obrigatório\n", exception.Message);
         }
 
