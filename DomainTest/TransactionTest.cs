@@ -3,6 +3,7 @@ using Xunit;
 using Domain;
 using Domain.Helpers.Validation;
 using Domain.Categories;
+using DomainTest.Builders;
 
 namespace DomainTest
 {
@@ -11,7 +12,7 @@ namespace DomainTest
         [Fact]
         public void ShouldCreateATransaction()
         {
-            var account = new Account("123", "33", "account", 3);
+            var account = new Account("33", "account", 3);
             var category = new Category("2342", "name", CategoryType.Credit, CategoryNeed.Util, 3);
 
             var transaction = new Transaction("232", DateTime.Today, "description", 10.2m, account, category);
@@ -20,30 +21,39 @@ namespace DomainTest
         }
 
         [Fact]
-        public void ShouldCreateATransactionWithUuid()
+        public void ShouldUpdateATransaction()
         {
-            var account = new Account("123", "33", "account", 3);
-            var category = new Category("2342", "name", CategoryType.Credit, CategoryNeed.Util, 3);
+            var transaction = TransactionBuilder.ATransaction().Build();
+            var newAccount = new Account("2", "new account", 3);
+            var newCategory = new Category("1", "new category name", CategoryType.Credit, CategoryNeed.Util, 3);
+            var newDate = DateTime.Today.AddDays(2);
+            var newDescription = "new description";
 
-            var transaction = new Transaction("2342", "232", DateTime.Today, "description", 10.2m, account, category);
+            transaction.Update(newDate, newDescription, 4.5m, newAccount, newCategory);
 
-            Assert.True(transaction != null);
+            Assert.Equal(newDate, transaction.Date);
+            Assert.Equal(newDescription, transaction.Description);
+            Assert.Equal(4.5m, transaction.Value);
+            Assert.Equal(newAccount, transaction.Account);
+            Assert.Equal(newCategory, transaction.Category);
         }
 
         [Fact]
         public void ShouldValidateParameters()
         {
-            var exception = Assert.Throws<DomainException<Transaction>>(() => new Transaction(null, DateTime.Today, null, 0, null, null));
+            var exception = Assert.Throws<DomainException<Transaction>>(() => new Transaction(null, new DateTime(1800, 1, 1), null, 0, null, null));
 
-            Assert.Equal("Propriedade é obrigatória\nDescrição é obrigatória\nValor deve ser maior que zero\nConta é obrigatória\nCategoria é obrigatória\n", exception.Message);
+            Assert.Equal("Data é obrigatória\nPropriedade é obrigatória\nDescrição é obrigatória\nValor deve ser maior que zero\nConta é obrigatória\nCategoria é obrigatória\n", exception.Message);
         }
 
         [Fact]
-        public void ShouldValidateParametersWithUuid()
+        public void ShouldValidateParametersOnUpdate()
         {
-            var exception = Assert.Throws<DomainException<Transaction>>(() => new Transaction(null, null, DateTime.Today, null, 0, null, null));
+            var transaction = TransactionBuilder.ATransaction().Build();
 
-            Assert.Equal("Propriedade é obrigatória\nDescrição é obrigatória\nValor deve ser maior que zero\nConta é obrigatória\nCategoria é obrigatória\n", exception.Message);
+            var exception = Assert.Throws<DomainException<Transaction>>(() => transaction.Update(new DateTime(1800,1,1), null, 0, null, null));
+
+            Assert.Equal("Data é obrigatória\nDescrição é obrigatória\nValor deve ser maior que zero\nConta é obrigatória\nCategoria é obrigatória\n", exception.Message);
         }
     }
 }

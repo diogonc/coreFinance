@@ -17,7 +17,7 @@ namespace Domain
         public Transaction(string propertyUuid, DateTime date, string description, decimal value,
               Account account, Category category)
         {
-            Validate(propertyUuid, description, value, account, category);
+            Validate(propertyUuid, date, description, value, account, category);
 
             Uuid = Guid.NewGuid().ToString();
             Date = date;
@@ -28,13 +28,10 @@ namespace Domain
             Category = category;
         }
 
-        public Transaction(string uuid, string propertyUuid, DateTime date, string description, decimal value,
-                        Account account, Category category)
+        public void Update(DateTime date, string description, decimal value, Account account, Category category)
         {
-            Validate(propertyUuid, description, value, account, category);
+            Validate(PropertyUuid, date, description, value, account, category);
 
-            Uuid = uuid;
-            PropertyUuid = propertyUuid;
             Date = date;
             Description = description;
             Value = value;
@@ -42,9 +39,10 @@ namespace Domain
             Category = category;
         }
 
-        private void Validate(string propertyUuid, string description, decimal value, Account account, Category category)
+        private void Validate(string propertyUuid, DateTime date, string description, decimal value, Account account, Category category)
         {
             Validations<Transaction>.Build()
+                                    .When(date <= new DateTime(1900, 01, 01), "Data é obrigatória")
                                     .When(propertyUuid == null, "Propriedade é obrigatória")
                                     .When(description == null, "Descrição é obrigatória")
                                     .When(value <= 0, "Valor deve ser maior que zero")
@@ -52,5 +50,6 @@ namespace Domain
                                     .When(category == null, "Categoria é obrigatória")
                                     .Thwros();
         }
+
     }
 }

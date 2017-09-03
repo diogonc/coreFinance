@@ -69,13 +69,13 @@ namespace CoreFinance.Controllers
             var category = _categoryRepository.Get(transactionViewModel.Category.Uuid,
                                                    transactionViewModel.PropertyUuid);
 
-            var transaction = new Transaction(uuid,
-                                        transactionViewModel.PropertyUuid,
-                                        transactionViewModel.Date,
-                                        transactionViewModel.Description,
-                                        transactionViewModel.Value,
-                                        account,
-                                        category);
+            var transaction = _transactionRepository.Get(uuid, transactionViewModel.PropertyUuid);
+
+            transaction.Update(transactionViewModel.Date,
+                               transactionViewModel.Description,
+                               transactionViewModel.Value,
+                               account,
+                               category);
 
             _transactionRepository.Update(transaction);
         }

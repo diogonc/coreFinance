@@ -43,7 +43,11 @@ namespace CoreFinance.Controllers
         public void Put(string uuid, [FromBody]AccountViewModel accountViewModel)
         {
             accountViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var account = new Account(uuid, accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority);
+
+            var account = _accountRepository.Get(uuid, accountViewModel.PropertyUuid);
+            
+            account.Update(accountViewModel.Name, accountViewModel.Priority);
+
             _accountRepository.Update(account);
         }
 

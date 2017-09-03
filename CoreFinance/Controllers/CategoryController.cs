@@ -52,6 +52,7 @@ namespace CoreFinance.Controllers
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
             var category = _categoryRepository.Get(uuid, categoryViewModel.PropertyUuid);
+            
             category.Update(categoryViewModel.Name,
                             (CategoryType) categoryViewModel.CategoryType,
                             (CategoryNeed) categoryViewModel.CategoryNeed,

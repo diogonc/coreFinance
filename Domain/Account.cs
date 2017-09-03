@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Helpers.Validation;
 
 namespace Domain
 {
@@ -9,20 +10,31 @@ namespace Domain
         public string Name { get; set; }
         public int Priority { get; set; }
 
-        public Account(string uuid, string propertyUuid, string name, int priority)
+        public Account(string propertyUuid, string name, int priority)
         {
-            Uuid = uuid;
+            Validate(propertyUuid, name, priority);
+
+            Uuid = Guid.NewGuid().ToString();
             PropertyUuid = propertyUuid;
             Name = name;
             Priority = priority;
         }
 
-        public Account(string propertyUuid, string name, int priority)
+        public void Update(string name, int priority)
         {
-            Uuid = Guid.NewGuid().ToString();
-            PropertyUuid = propertyUuid;
+            Validate(PropertyUuid, name, priority);
+
             Name = name;
             Priority = priority;
+        }
+
+        private void Validate(string propertyUuid, string name, int priority)
+        {
+            Validations<Account>.Build()
+                               .When(propertyUuid == null, "Propriedade é obrigatória")
+                               .When(name == null, "Nome é obrigatório")
+                               .When(priority == 0, "Prioridade é obrigatória")
+                               .Thwros();
         }
     }
 }
