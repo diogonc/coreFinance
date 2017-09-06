@@ -11,10 +11,14 @@ namespace CoreFinance.Controllers
     public class CategoryController : Controller
     {
         private ICategoryRepository _categoryRepository;
+        private IGroupRepository _groupRepository;
+        private UpdateCategoryService _updateCategoryService;
 
-        public CategoryController(ICategoryRepository categoryRepository)
+        public CategoryController(ICategoryRepository categoryRepository, IGroupRepository groupRepository, UpdateCategoryService updateCategoryService)
         {
             _categoryRepository = categoryRepository;
+            _groupRepository = groupRepository;
+            _updateCategoryService = updateCategoryService;
         }
 
         [HttpGet("")]
@@ -28,7 +32,7 @@ namespace CoreFinance.Controllers
         public ActionResult Get(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
-            var category =  _categoryRepository.Get(uuid, propertyUuid);
+            var category = _categoryRepository.Get(uuid, propertyUuid);
             return Ok(category);
         }
 
@@ -36,10 +40,13 @@ namespace CoreFinance.Controllers
         public string Post([FromBody]CategoryViewModel categoryViewModel)
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            
+
+            var group = _groupRepository.Get(categoryViewModel.GroupUuid, categoryViewModel.PropertyUuid);
+
             var category = new Category(categoryViewModel.PropertyUuid,
                                         categoryViewModel.Name,
                                         (CategoryType)categoryViewModel.CategoryType,
+                                        group,
                                         (CategoryNeed)categoryViewModel.CategoryNeed,
                                         categoryViewModel.Priority);
             _categoryRepository.Create(category);
@@ -51,14 +58,15 @@ namespace CoreFinance.Controllers
         public void Put(string uuid, [FromBody]CategoryViewModel categoryViewModel)
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var category = _categoryRepository.Get(uuid, categoryViewModel.PropertyUuid);
-            
-            category.Update(categoryViewModel.Name,
-                            (CategoryType) categoryViewModel.CategoryType,
-                            (CategoryNeed) categoryViewModel.CategoryNeed,
+
+            var group = _groupRepository.Get(categoryViewModel.GroupUuid, categoryViewModel.PropertyUuid);
+
+            _updateCategoryService.Update(uuid, categoryViewModel.PropertyUuid, categoryViewModel.Name,
+                            (CategoryType)categoryViewModel.CategoryType,
+                            group,
+                            (CategoryNeed)categoryViewModel.CategoryNeed,
                             categoryViewModel.Priority);
 
-            _categoryRepository.Update(category);
         }
 
         [HttpDelete("{uuid}")]

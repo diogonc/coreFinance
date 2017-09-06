@@ -11,7 +11,7 @@ namespace DomainTest.Builders
         private string _description = "description";
         private decimal _value = 2423.34m;
         private Account _account = new Account("3242", "credit card", 3);
-        private Category _category = new Category("23424", "food", CategoryType.Debit, CategoryNeed.Essential, 2);
+        private Category _category = new Category("23424", "food", CategoryType.Debit, new Group("32423", "group name", 3), CategoryNeed.Essential, 2);
 
         public static TransactionBuilder ATransaction()
         {

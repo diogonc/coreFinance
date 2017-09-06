@@ -2,8 +2,9 @@ using System;
 using Xunit;
 using Domain;
 using Domain.Helpers.Validation;
+using Domain.Categories;
 
-namespace DomainTest
+namespace DomainTest.Categories
 {
     public class GroupTest
     {

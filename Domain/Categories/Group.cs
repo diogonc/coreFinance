@@ -1,7 +1,7 @@
 using System;
 using Domain.Helpers.Validation;
 
-namespace Domain
+namespace Domain.Categories
 {
     public class Group : Model
     {

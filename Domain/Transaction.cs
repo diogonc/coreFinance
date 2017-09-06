@@ -39,6 +39,15 @@ namespace Domain
             Category = category;
         }
 
+        public void UpdateCategory(Category category)
+        {
+            Validations<Transaction>.Build()
+                                    .When(category == null, "Categoria é obrigatória")
+                                    .Thwros();
+
+            Category = category;
+        }
+
         private void Validate(string propertyUuid, DateTime date, string description, decimal value, Account account, Category category)
         {
             Validations<Transaction>.Build()
