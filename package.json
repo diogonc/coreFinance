@@ -5,6 +5,7 @@
     "scripts": {
         "test": "dotnet test DomainTest/DomainTest.csproj",
         "build": "dotnet build",
+        "clean": "dotnet clean",
         "serve": "cd CoreFinance; dotnet run"
     },
     "private": true

@@ -14,7 +14,9 @@ namespace CoreFinance
             services.AddSingleton<IAccountRepository, AccountRepository>();
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<ITransactionRepository, TransactionRepository>();
+            services.AddSingleton<IGroupRepository, GroupRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<UpdateCategoryService, UpdateCategoryService>();
             services.AddSingleton<MigrateTransactions, MigrateTransactions>();
         }
     }

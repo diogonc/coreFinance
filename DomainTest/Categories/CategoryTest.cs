@@ -28,7 +28,7 @@ namespace DomainTest.Categories
         {
             var exception = Assert.Throws<DomainException<Category>>(() => new Category(null, null, CategoryType.Credit, null, CategoryNeed.Util, 3));
 
-            Assert.Equal("Propriedade é obrigatória\nGrupo é obrigatório\nNome é obrigatório\n", exception.Message);
+            Assert.Equal("Propriedade é obrigatória\nNome é obrigatório\n", exception.Message);
         }
 
         [Fact]
