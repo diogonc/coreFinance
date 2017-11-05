@@ -32,16 +32,17 @@ namespace CoreFinance.Controllers
         }
 
         [HttpPost]
-        public string Post([FromBody]AccountViewModel groupViewModel)
+        public CreatedViewModel Post([FromBody]AccountViewModel groupViewModel)
         {
             groupViewModel.PropertyUuid = Request.Headers["propertyuuid"];
             var group = new Group(groupViewModel.PropertyUuid, groupViewModel.Name, groupViewModel.Priority);
             _groupRepository.Create(group);
-            return group.Uuid;
+
+            return new CreatedViewModel(group.Uuid);
         }
 
         [HttpPut("{uuid}")]
-        public void Put(string uuid, [FromBody]AccountViewModel groupViewModel)
+        public ActionResult Put(string uuid, [FromBody]AccountViewModel groupViewModel)
         {
             groupViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
@@ -50,13 +51,17 @@ namespace CoreFinance.Controllers
             group.Update(groupViewModel.Name, groupViewModel.Priority);
 
             _groupRepository.Update(group);
+
+            return Ok();
         }
 
         [HttpDelete("{uuid}")]
-        public void Delete(string uuid)
+        public ActionResult Delete(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
             _groupRepository.Delete(uuid, propertyUuid);
+
+            return Ok();
         }
     }
 }

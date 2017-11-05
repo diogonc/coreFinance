@@ -37,7 +37,7 @@ namespace CoreFinance.Controllers
         }
 
         [HttpPost]
-        public string Post([FromBody]CategoryViewModel categoryViewModel)
+        public CreatedViewModel Post([FromBody]CategoryViewModel categoryViewModel)
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
@@ -51,11 +51,11 @@ namespace CoreFinance.Controllers
                                         categoryViewModel.Priority);
             _categoryRepository.Create(category);
 
-            return category.Uuid;
+            return new CreatedViewModel(category.Uuid);
         }
 
         [HttpPut("{uuid}")]
-        public void Put(string uuid, [FromBody]CategoryViewModel categoryViewModel)
+        public ActionResult Put(string uuid, [FromBody]CategoryViewModel categoryViewModel)
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
@@ -67,13 +67,16 @@ namespace CoreFinance.Controllers
                             (CategoryNeed)categoryViewModel.CategoryNeed,
                             categoryViewModel.Priority);
 
+            return Ok();
         }
 
         [HttpDelete("{uuid}")]
-        public void Delete(string uuid)
+        public ActionResult Delete(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
             _categoryRepository.Delete(uuid, propertyUuid);
+
+            return Ok();
         }
     }
 }

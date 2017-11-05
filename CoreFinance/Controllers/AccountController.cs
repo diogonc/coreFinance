@@ -31,16 +31,17 @@ namespace CoreFinance.Controllers
         }
 
         [HttpPost]
-        public string Post([FromBody]AccountViewModel accountViewModel)
+        public CreatedViewModel Post([FromBody]AccountViewModel accountViewModel)
         {
             accountViewModel.PropertyUuid = Request.Headers["propertyuuid"];
             var account = new Account(accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority);
             _accountRepository.Create(account);
-            return account.Uuid;
+
+            return new CreatedViewModel(account.Uuid);
         }
 
         [HttpPut("{uuid}")]
-        public void Put(string uuid, [FromBody]AccountViewModel accountViewModel)
+        public ActionResult Put(string uuid, [FromBody]AccountViewModel accountViewModel)
         {
             accountViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
@@ -49,13 +50,17 @@ namespace CoreFinance.Controllers
             account.Update(accountViewModel.Name, accountViewModel.Priority);
 
             _accountRepository.Update(account);
+
+            return Ok();
         }
 
         [HttpDelete("{uuid}")]
-        public void Delete(string uuid)
+        public ActionResult Delete(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
             _accountRepository.Delete(uuid, propertyUuid);
+
+            return Ok();
         }
     }
 }
