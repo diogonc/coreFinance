@@ -13,12 +13,17 @@ namespace CoreFinance.Controllers
         private ICategoryRepository _categoryRepository;
         private IGroupRepository _groupRepository;
         private UpdateCategoryService _updateCategoryService;
+        private DeleteCategoryService _deleteCategoryService;
 
-        public CategoryController(ICategoryRepository categoryRepository, IGroupRepository groupRepository, UpdateCategoryService updateCategoryService)
+        public CategoryController(ICategoryRepository categoryRepository,
+                                  IGroupRepository groupRepository, 
+                                  UpdateCategoryService updateCategoryService,
+                                  DeleteCategoryService deleteCategoryService)
         {
             _categoryRepository = categoryRepository;
             _groupRepository = groupRepository;
             _updateCategoryService = updateCategoryService;
+            _deleteCategoryService = deleteCategoryService;
         }
 
         [HttpGet("")]
@@ -74,7 +79,8 @@ namespace CoreFinance.Controllers
         public ActionResult Delete(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
-            _categoryRepository.Delete(uuid, propertyUuid);
+            
+            _deleteCategoryService.Delete(uuid, propertyUuid);
 
             return Ok();
         }
