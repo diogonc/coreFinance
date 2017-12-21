@@ -9,13 +9,15 @@ namespace DomainTest
 {
     public class TransactionTest
     {
+        private string _propertyUuid = "1";
+
         [Fact]
         public void ShouldCreateATransaction()
         {
-            var account = new Account("33", "account", 3);
-            var category = new Category("2342", "name", CategoryType.Credit, new Group("234", "group name", 3), CategoryNeed.Util, 3);
+            var account = new Account(_propertyUuid, "account", 3);
+            var category = new Category(_propertyUuid, "name", CategoryType.Credit, new Group(_propertyUuid, "group name",CategoryType.Credit, 3), CategoryNeed.Util, 3);
 
-            var transaction = new Transaction("232", DateTime.Today, "description", 10.2m, account, category);
+            var transaction = new Transaction(_propertyUuid, DateTime.Today, "description", 10.2m, account, category);
 
             Assert.True(transaction != null);
         }
@@ -24,8 +26,8 @@ namespace DomainTest
         public void ShouldUpdateATransaction()
         {
             var transaction = TransactionBuilder.ATransaction().Build();
-            var newAccount = new Account("2", "new account", 3);
-            var newCategory = new Category("1", "new category name", CategoryType.Credit, new Group("3424", "group name", 3), CategoryNeed.Util, 3);
+            var newAccount = new Account(_propertyUuid, "new account", 3);
+            var newCategory = new Category(_propertyUuid, "new category name", CategoryType.Credit, new Group(_propertyUuid, "group name",CategoryType.Credit, 3), CategoryNeed.Util, 3);
             var newDate = DateTime.Today.AddDays(2);
             var newDescription = "new description";
 

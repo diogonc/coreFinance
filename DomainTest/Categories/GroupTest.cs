@@ -11,7 +11,7 @@ namespace DomainTest.Categories
         [Fact]
         public void ShouldCreateAGroup()
         {
-            var group = new Group("2342", "name", 3);
+            var group = new Group("2342", "name", CategoryType.Credit, 3);
 
             Assert.True(group != null);
         }
@@ -19,7 +19,7 @@ namespace DomainTest.Categories
         [Fact]
         public void ShouldValidate()
         {
-            var exception = Assert.Throws<DomainException<Group>>(() => new Group(null, null, 0));
+            var exception = Assert.Throws<DomainException<Group>>(() => new Group(null, null, CategoryType.Credit, 0));
 
             Assert.Equal("Propriedade é obrigatória\nNome é obrigatório\nPrioridade é obrigatória\n", exception.Message);
         }
@@ -27,7 +27,7 @@ namespace DomainTest.Categories
         [Fact]
         public void ShouldUpdateAGroup()
         {
-            var group = new Group ("234234", "name", 4);
+            var group = new Group("234234", "name", CategoryType.Credit, 4);
 
             group.Update("new name", 5);
 

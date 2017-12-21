@@ -9,16 +9,17 @@ namespace DomainTest.Categories
     public class CategoryTest
     {
         private Group _group;
+        private string _propertyUuid = "23423";
 
         public CategoryTest()
         {
-            _group = new Group("234", "group name", 1);
+            _group = new Group(_propertyUuid, "group name", CategoryType.Credit, 1);
         }
 
         [Fact]
         public void ShouldCreateACategory()
         {
-            var category = new Category("2342", "name", CategoryType.Credit, _group, CategoryNeed.Util, 3);
+            var category = new Category(_propertyUuid, "name", CategoryType.Credit, _group, CategoryNeed.Util, 3);
 
             Assert.True(category != null);
         }
@@ -31,15 +32,24 @@ namespace DomainTest.Categories
             Assert.Equal("Propriedade é obrigatória\nNome é obrigatório\n", exception.Message);
         }
 
+
+        [Fact]
+        public void GroupAndCategoryMustHaveTheSameType()
+        {
+            var exception = Assert.Throws<DomainException<Category>>(() => new Category(_propertyUuid, "category name", CategoryType.Debit, _group, CategoryNeed.Util, 3));
+
+            Assert.Equal("Tipo do agrupamento deve ser igual ao da categoria\n", exception.Message);
+        }
+
         [Fact]
         public void ShouldUpdateACategory()
         {
-            var category = new Category("234", "name", CategoryType.Credit, _group, CategoryNeed.Util, 34);
+            var category = new Category(_propertyUuid, "name", CategoryType.Credit, _group, CategoryNeed.Util, 34);
 
-            category.Update("new name", CategoryType.Debit, _group, CategoryNeed.Necessary, 4);
+            category.Update("new name", CategoryType.Credit, _group, CategoryNeed.Necessary, 4);
 
             Assert.Equal("new name", category.Name);
-            Assert.Equal(CategoryType.Debit, category.CategoryType);
+            Assert.Equal(CategoryType.Credit, category.CategoryType);
             Assert.Equal(CategoryNeed.Necessary, category.CategoryNeed);
             Assert.Equal(4, category.Priority);
         }

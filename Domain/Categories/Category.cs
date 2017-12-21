@@ -15,7 +15,7 @@ namespace Domain.Categories
 
         public Category(string propertyUuid, string name, CategoryType categoryType, Group group, CategoryNeed categoryNeed, int priority)
         {
-            Validate(propertyUuid, name, categoryType, categoryNeed, priority);
+            Validate(propertyUuid, name, categoryType, group, categoryNeed, priority);
 
             Uuid = Guid.NewGuid().ToString();
             PropertyUuid = propertyUuid;
@@ -28,7 +28,7 @@ namespace Domain.Categories
 
         public void Update(string name, CategoryType categoryType, Group group, CategoryNeed categoryNeed, int priority)
         {
-            Validate(PropertyUuid, name, categoryType, categoryNeed, priority);
+            Validate(PropertyUuid, name, categoryType, group, categoryNeed, priority);
 
             Name = name;
             CategoryType = categoryType;
@@ -37,11 +37,13 @@ namespace Domain.Categories
             Priority = priority;
         }
 
-        private void Validate(string propertyUuid, string name, CategoryType categoryType, CategoryNeed categoryNeed, int priority)
+        private void Validate(string propertyUuid, string name, CategoryType categoryType, Group group, CategoryNeed categoryNeed, int priority)
         {
             Validations<Category>.Build()
                              .When(propertyUuid == null, "Propriedade é obrigatória")
                              .When(name == null, "Nome é obrigatório")
+                             .When(group != null && propertyUuid != group.PropertyUuid, "Propriedade do agrupamento deve ser igual a da categoria")
+                             .When(group != null && categoryType != group.CategoryType, "Tipo do agrupamento deve ser igual ao da categoria")
                              .Thwros();
         }
     }

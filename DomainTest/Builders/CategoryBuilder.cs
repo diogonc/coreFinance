@@ -4,7 +4,7 @@ namespace DomainTest.Builders
 {
     public class CategoryBuilder
     {
-        private Group _group = new Group("23423", "group name", 4);
+        private Group _group = new Group("324", "group name",CategoryType.Debit, 4);
 
         public static CategoryBuilder ACategory()
         {

@@ -7,16 +7,18 @@ namespace Domain.Categories
     {
         public string Uuid { get; set; }
         public string PropertyUuid { get; set; }
+        public CategoryType CategoryType { get; private set; }
         public string Name { get; set; }
         public int Priority { get; set; }
 
-        public Group(string propertyUuid, string name, int priority)
+        public Group(string propertyUuid, string name, CategoryType categoryType, int priority)
         {
             Validate(propertyUuid, name, priority);
 
             Uuid = Guid.NewGuid().ToString();
             PropertyUuid = propertyUuid;
             Name = name;
+            CategoryType = categoryType;
             Priority = priority;
         }
 

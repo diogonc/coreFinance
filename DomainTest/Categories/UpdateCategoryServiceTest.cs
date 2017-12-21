@@ -25,7 +25,7 @@ namespace DomainTest.Categories
             _updateCategoryService = new UpdateCategoryService(_categoryRepository.Object, _transactionRepository.Object);
 
             _category = CategoryBuilder.ACategory().Build();
-            _group = new Group("2342", "gname", 9);
+            _group = new Group(_category.PropertyUuid, "gname",CategoryType.Debit, 9);
             _categoryRepository.Setup(repository => repository.Get(_category.Uuid, _category.PropertyUuid)).Returns(_category);
 
         }
@@ -33,7 +33,7 @@ namespace DomainTest.Categories
         [Fact]
         public void ShouldUpdateACategory()
         {
-            _updateCategoryService.Update(_category.Uuid, _category.PropertyUuid, "new name", CategoryType.DebitTransfer, _group, CategoryNeed.Util, 2);
+            _updateCategoryService.Update(_category.Uuid, _category.PropertyUuid, "new name", CategoryType.Debit, _group, CategoryNeed.Util, 2);
 
             Assert.Equal("new name", _category.Name); 
             _categoryRepository.Verify(repository => repository.Update(_category), Times.Once);
@@ -46,7 +46,7 @@ namespace DomainTest.Categories
             _transactionRepository.Setup(repository => repository.GetFromCategory(_category.PropertyUuid, _category.Uuid))
                                   .Returns(transactions);
 
-            _updateCategoryService.Update(_category.Uuid, _category.PropertyUuid, "new name", CategoryType.DebitTransfer, _group, CategoryNeed.Util, 2);
+            _updateCategoryService.Update(_category.Uuid, _category.PropertyUuid, "new name", CategoryType.Debit, _group, CategoryNeed.Util, 2);
 
             _transactionRepository.Verify(repository => repository.Update(transactions.FirstOrDefault()), Times.Once);
             _transactionRepository.Verify(repository => repository.Update(transactions.LastOrDefault()), Times.Once);

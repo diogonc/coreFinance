@@ -10,9 +10,15 @@ namespace DomainTest.Builders
         private DateTime _date = DateTime.Now;
         private string _description = "description";
         private decimal _value = 2423.34m;
-        private Account _account = new Account("3242", "credit card", 3);
-        private Category _category = new Category("23424", "food", CategoryType.Debit, new Group("32423", "group name", 3), CategoryNeed.Essential, 2);
+        private Account _account;
+        private Category _category;
+        public TransactionBuilder()
+        {
+            _account = new Account(_propertyUuid, "credit card", 3);
+            _category = new Category(_propertyUuid, "food", CategoryType.Debit, new Group(_propertyUuid, "group name", CategoryType.Debit, 3),
+                                                      CategoryNeed.Essential, 2);
 
+        }
         public static TransactionBuilder ATransaction()
         {
             return new TransactionBuilder();

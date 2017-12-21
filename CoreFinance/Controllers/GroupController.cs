@@ -32,22 +32,23 @@ namespace CoreFinance.Controllers
         }
 
         [HttpPost]
-        public CreatedViewModel Post([FromBody]AccountViewModel groupViewModel)
+        public CreatedViewModel Post([FromBody]GroupViewModel groupViewModel)
         {
             groupViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var group = new Group(groupViewModel.PropertyUuid, groupViewModel.Name, groupViewModel.Priority);
+            var group = new Group(groupViewModel.PropertyUuid, groupViewModel.Name, (CategoryType)groupViewModel.CategoryType, groupViewModel.Priority);
             _groupRepository.Create(group);
 
             return new CreatedViewModel(group.Uuid);
         }
 
         [HttpPut("{uuid}")]
-        public ActionResult Put(string uuid, [FromBody]AccountViewModel groupViewModel)
+        public ActionResult Put(string uuid, [FromBody]GroupViewModel groupViewModel)
         {
             groupViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
             var group = _groupRepository.Get(uuid, groupViewModel.PropertyUuid);
-            
+
+            //TODO: validate category
             group.Update(groupViewModel.Name, groupViewModel.Priority);
 
             _groupRepository.Update(group);
