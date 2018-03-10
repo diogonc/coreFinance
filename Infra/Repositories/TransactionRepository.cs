@@ -35,5 +35,15 @@ namespace Infra.Repositories
             cursor.Wait();
             return cursor.Result;
         }
+
+          public IEnumerable<Transaction> GetFromAccount(string propertyUuid, string accountUuid)
+        {
+            var builder = Builders<Transaction>.Filter;
+            var filter = builder.Eq(transaction => transaction.PropertyUuid, propertyUuid) & builder.Eq(transaction => transaction.Account.Uuid, accountUuid);
+
+            var cursor = _collection.Find(filter).ToListAsync();
+            cursor.Wait();
+            return cursor.Result;
+        }
     }
 }

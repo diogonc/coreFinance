@@ -14,11 +14,11 @@ namespace Domain.Categories
             _transactionRepository = transactionRepository;
         }
 
-        public void Update(string uuid, string propertyUuid, string name, CategoryType categoryType, Group group, CategoryNeed categoryNeed, int priority)
+        public void Update(string uuid, string propertyUuid, string name, CategoryType categoryType, Group group, int priority)
         {
             var category = _categoryRepository.Get(uuid, propertyUuid);
 
-            category.Update(name, categoryType, group, categoryNeed, priority);
+            category.Update(name, categoryType, group, priority);
 
             UpdateTransactions(category);
 

@@ -15,6 +15,7 @@ namespace Infra.Repositories
                 cm.AutoMap();
                 cm.GetMemberMap(a => a.Uuid).SetElementName("uuid");
                 cm.GetMemberMap(a => a.Name).SetElementName("name");
+                cm.GetMemberMap(a => a.CategoryType).SetElementName("categoryType");
                 cm.GetMemberMap(a => a.Priority).SetElementName("priority");
                 cm.GetMemberMap(a => a.PropertyUuid).SetElementName("propertyUuid");
             });

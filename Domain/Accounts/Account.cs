@@ -1,7 +1,7 @@
 ﻿using System;
 using Domain.Helpers.Validation;
 
-namespace Domain
+namespace Domain.Accounts
 {
     public class Account : Model
     {
@@ -9,8 +9,9 @@ namespace Domain
         public string PropertyUuid { get; set; }
         public string Name { get; set; }
         public int Priority { get; set; }
+        public Owner Owner {get; set;}
 
-        public Account(string propertyUuid, string name, int priority)
+        public Account(string propertyUuid, string name, int priority, Owner owner)
         {
             Validate(propertyUuid, name, priority);
 
@@ -18,14 +19,16 @@ namespace Domain
             PropertyUuid = propertyUuid;
             Name = name;
             Priority = priority;
+            Owner = owner;
         }
 
-        public void Update(string name, int priority)
+        public void Update(string name, int priority, Owner owner)
         {
             Validate(PropertyUuid, name, priority);
 
             Name = name;
             Priority = priority;
+            Owner = owner;
         }
 
         private void Validate(string propertyUuid, string name, int priority)

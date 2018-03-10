@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using Domain;
 using Domain.Helpers.Validation;
+using Domain.Accounts;
 using Domain.Categories;
 using DomainTest.Builders;
 
@@ -14,8 +15,8 @@ namespace DomainTest
         [Fact]
         public void ShouldCreateATransaction()
         {
-            var account = new Account(_propertyUuid, "account", 3);
-            var category = new Category(_propertyUuid, "name", CategoryType.Credit, new Group(_propertyUuid, "group name",CategoryType.Credit, 3), CategoryNeed.Util, 3);
+            var account = AccountBuilder.AnAccount().Build();
+            var category = new Category(_propertyUuid, "name", CategoryType.Credit, new Group(_propertyUuid, "group name",CategoryType.Credit, 3), 3);
 
             var transaction = new Transaction(_propertyUuid, DateTime.Today, "description", 10.2m, account, category);
 
@@ -26,8 +27,8 @@ namespace DomainTest
         public void ShouldUpdateATransaction()
         {
             var transaction = TransactionBuilder.ATransaction().Build();
-            var newAccount = new Account(_propertyUuid, "new account", 3);
-            var newCategory = new Category(_propertyUuid, "new category name", CategoryType.Credit, new Group(_propertyUuid, "group name",CategoryType.Credit, 3), CategoryNeed.Util, 3);
+            var newAccount = AccountBuilder.AnAccount().Build();
+            var newCategory = new Category(_propertyUuid, "new category name", CategoryType.Credit, new Group(_propertyUuid, "group name",CategoryType.Credit, 3), 3);
             var newDate = DateTime.Today.AddDays(2);
             var newDescription = "new description";
 
@@ -67,6 +68,17 @@ namespace DomainTest
             transaction.UpdateCategory(category);
 
             Assert.Equal(category, transaction.Category);
+        }
+
+         [Fact]
+        public void ShouldUpdateAccount()
+        {
+            var transaction = TransactionBuilder.ATransaction().Build();
+            var account = AccountBuilder.AnAccount().Build();
+
+            transaction.UpdateAccount(account);
+
+            Assert.Equal(account, transaction.Account);
         }
     }
 }

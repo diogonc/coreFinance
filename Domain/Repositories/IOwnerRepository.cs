@@ -2,7 +2,7 @@
 
 namespace Domain.Repositories
 {
-    public interface IAccountRepository : IRepository<Account>
+    public interface IOwnerRepository : IRepository<Owner>
     {
     }
 }

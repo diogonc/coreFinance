@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Accounts;
 using Domain.Categories;
 using Domain.Helpers.Validation;
 
@@ -46,6 +47,15 @@ namespace Domain
                                     .Thwros();
 
             Category = category;
+        }
+
+        public void UpdateAccount(Account account)
+        {
+            Validations<Transaction>.Build()
+                                    .When(account == null, "Conta é obrigatória")
+                                    .Thwros();
+
+            Account = account;
         }
 
         private void Validate(string propertyUuid, DateTime date, string description, decimal value, Account account, Category category)

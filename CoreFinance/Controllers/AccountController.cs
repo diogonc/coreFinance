@@ -1,4 +1,4 @@
-﻿using Domain;
+﻿using Domain.Accounts;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,10 +10,17 @@ namespace CoreFinance.Controllers
     public class AccountController : Controller
     {
         private IAccountRepository _accountRepository;
+        private IOwnerRepository _ownerRepository;
+        private UpdateAccountService _updateAccountService;
+        private DeleteAccountService _deleteAccountService;
 
-        public AccountController(IAccountRepository accountRepository)
+        public AccountController(IAccountRepository accountRepository, IOwnerRepository ownerRepository,
+             UpdateAccountService updateAccountService, DeleteAccountService deleteAccountService)
         {
             _accountRepository = accountRepository;
+            _ownerRepository = ownerRepository;
+            _updateAccountService = updateAccountService;
+            _deleteAccountService = deleteAccountService;
         }
 
         [HttpGet("")]
@@ -34,7 +41,8 @@ namespace CoreFinance.Controllers
         public CreatedViewModel Post([FromBody]AccountViewModel accountViewModel)
         {
             accountViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var account = new Account(accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority);
+            var owner = _ownerRepository.Get(accountViewModel.OwnerUuid, accountViewModel.PropertyUuid);
+            var account = new Account(accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority, owner);
             _accountRepository.Create(account);
 
             return new CreatedViewModel(account.Uuid);
@@ -45,11 +53,8 @@ namespace CoreFinance.Controllers
         {
             accountViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var account = _accountRepository.Get(uuid, accountViewModel.PropertyUuid);
-            
-            account.Update(accountViewModel.Name, accountViewModel.Priority);
-
-            _accountRepository.Update(account);
+            var owner = _ownerRepository.Get(accountViewModel.OwnerUuid, accountViewModel.PropertyUuid);
+            _updateAccountService.Update(uuid, accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority, owner);
 
             return Ok();
         }
@@ -58,7 +63,8 @@ namespace CoreFinance.Controllers
         public ActionResult Delete(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
-            _accountRepository.Delete(uuid, propertyUuid);
+
+            _deleteAccountService.Delete(uuid, propertyUuid);
 
             return Ok();
         }

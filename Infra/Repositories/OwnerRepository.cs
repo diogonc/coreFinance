@@ -1,16 +1,15 @@
 ﻿using Domain.Accounts;
-using Domain;
 using Domain.Repositories;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace Infra.Repositories
 {
-    public class AccountRepository : Repository<Account>, IAccountRepository
+    public class OwnerRepository : Repository<Owner>, IOwnerRepository
     {
-        public AccountRepository(MongoClient client)
+        public OwnerRepository(MongoClient client)
         {
-            BsonClassMap.RegisterClassMap<Account>(cm =>
+            BsonClassMap.RegisterClassMap<Owner>(cm =>
             {
                 cm.AutoMap();
                 cm.GetMemberMap(a => a.Uuid).SetElementName("uuid");
@@ -20,7 +19,7 @@ namespace Infra.Repositories
             });
 
             var database = client.GetDatabase("finance");
-            _collection = database.GetCollection<Account>("account");
+            _collection = database.GetCollection<Owner>("owner");
         }
     }
 }

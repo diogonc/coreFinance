@@ -1,3 +1,4 @@
+using Domain.Accounts;
 using Domain.Categories;
 using Domain.Repositories;
 using Infra.Repositories;
@@ -16,7 +17,10 @@ namespace CoreFinance
             services.AddSingleton<ITransactionRepository, TransactionRepository>();
             services.AddSingleton<IGroupRepository, GroupRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<UpdateCategoryService, UpdateCategoryService>();
+            services.AddSingleton<IOwnerRepository, OwnerRepository>();
+            services.AddSingleton<Domain.Accounts.UpdateAccountService, Domain.Accounts.UpdateAccountService>();
+            services.AddSingleton<DeleteAccountService, DeleteAccountService>();
+            services.AddSingleton<Domain.Categories.UpdateCategoryService, Domain.Categories.UpdateCategoryService>();
             services.AddSingleton<DeleteCategoryService, DeleteCategoryService>();
             services.AddSingleton<MigrateTransactions, MigrateTransactions>();
         }

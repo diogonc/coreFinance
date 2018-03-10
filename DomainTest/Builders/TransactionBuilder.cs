@@ -1,6 +1,7 @@
 using System;
 using Domain;
 using Domain.Categories;
+using Domain.Accounts;
 
 namespace DomainTest.Builders
 {
@@ -12,11 +13,11 @@ namespace DomainTest.Builders
         private decimal _value = 2423.34m;
         private Account _account;
         private Category _category;
+
         public TransactionBuilder()
         {
-            _account = new Account(_propertyUuid, "credit card", 3);
-            _category = new Category(_propertyUuid, "food", CategoryType.Debit, new Group(_propertyUuid, "group name", CategoryType.Debit, 3),
-                                                      CategoryNeed.Essential, 2);
+            _account = AccountBuilder.AnAccount().Build();
+            _category = new Category(_propertyUuid, "food", CategoryType.Debit, new Group(_propertyUuid, "group name", CategoryType.Debit, 3), 2);
 
         }
         public static TransactionBuilder ATransaction()

@@ -10,34 +10,31 @@ namespace Domain.Categories
         public CategoryType CategoryType { get; private set; }
         public string Name { get; private set; }
         public int Priority { get; private set; }
-        public CategoryNeed CategoryNeed { get; private set; }
         public Group Group { get; private set; }
 
-        public Category(string propertyUuid, string name, CategoryType categoryType, Group group, CategoryNeed categoryNeed, int priority)
+        public Category(string propertyUuid, string name, CategoryType categoryType, Group group, int priority)
         {
-            Validate(propertyUuid, name, categoryType, group, categoryNeed, priority);
+            Validate(propertyUuid, name, categoryType, group, priority);
 
             Uuid = Guid.NewGuid().ToString();
             PropertyUuid = propertyUuid;
             Name = name;
             Group = group;
             CategoryType = categoryType;
-            CategoryNeed = categoryNeed;
             Priority = priority;
         }
 
-        public void Update(string name, CategoryType categoryType, Group group, CategoryNeed categoryNeed, int priority)
+        public void Update(string name, CategoryType categoryType, Group group, int priority)
         {
-            Validate(PropertyUuid, name, categoryType, group, categoryNeed, priority);
+            Validate(PropertyUuid, name, categoryType, group, priority);
 
             Name = name;
             CategoryType = categoryType;
             Group = group;
-            CategoryNeed = categoryNeed;
             Priority = priority;
         }
 
-        private void Validate(string propertyUuid, string name, CategoryType categoryType, Group group, CategoryNeed categoryNeed, int priority)
+        private void Validate(string propertyUuid, string name, CategoryType categoryType, Group group, int priority)
         {
             Validations<Category>.Build()
                              .When(propertyUuid == null, "Propriedade é obrigatória")

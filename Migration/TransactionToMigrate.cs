@@ -1,6 +1,7 @@
 using System;
 using Domain;
 using Domain.Categories;
+using Domain.Accounts;
 
 namespace Migration
 {

@@ -52,7 +52,6 @@ namespace CoreFinance.Controllers
                                         categoryViewModel.Name,
                                         (CategoryType)categoryViewModel.CategoryType,
                                         group,
-                                        (CategoryNeed)categoryViewModel.CategoryNeed,
                                         categoryViewModel.Priority);
             _categoryRepository.Create(category);
 
@@ -69,7 +68,6 @@ namespace CoreFinance.Controllers
             _updateCategoryService.Update(uuid, categoryViewModel.PropertyUuid, categoryViewModel.Name,
                             (CategoryType)categoryViewModel.CategoryType,
                             group,
-                            (CategoryNeed)categoryViewModel.CategoryNeed,
                             categoryViewModel.Priority);
 
             return Ok();
