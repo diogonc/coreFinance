@@ -19,6 +19,9 @@ namespace Domain.Categories
         public void Delete(string uuid, string propertyUuid)
         {
             var transactions = _transactionRepository.GetFromCategory(propertyUuid, uuid);
+            if(transactions.Any())
+                return;
+                
             Validations<DeleteCategoryService>.Build()
                             .When(transactions.Any(), "Categoria não pode ser excluída pois existem transações vinculadas a ela")
                             .Thwros();

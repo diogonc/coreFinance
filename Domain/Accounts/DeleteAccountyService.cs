@@ -19,6 +19,9 @@ namespace Domain.Accounts
         public void Delete(string uuid, string propertyUuid)
         {
             var transactions = _transactionRepository.GetFromAccount(propertyUuid, uuid);
+            if(transactions.Any())
+                return;
+
             Validations<DeleteAccountService>.Build()
                             .When(transactions.Any(), "Conta não pode ser excluída pois existem transações vinculadas a ela")
                             .Thwros();

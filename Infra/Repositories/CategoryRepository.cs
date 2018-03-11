@@ -18,6 +18,7 @@ namespace Infra.Repositories
                 cm.GetMemberMap(c => c.CategoryType).SetElementName("categoryType");
                 cm.GetMemberMap(c => c.Priority).SetElementName("priority");
                 cm.GetMemberMap(c => c.PropertyUuid).SetElementName("propertyUuid");
+                cm.GetMemberMap(c => c.Group).SetElementName("group");
             });
 
             var database = client.GetDatabase("finance");
