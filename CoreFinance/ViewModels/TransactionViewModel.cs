@@ -8,10 +8,7 @@ namespace CoreFinance.ViewModels
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public decimal Value { get; set; }
-        public CategoryOrAccountUuid Category { get; set; }
-        public CategoryOrAccountUuid Account { get; set; }
-    }
-    public class CategoryOrAccountUuid{
-        public string Uuid {get; set;}
+        public EntityWithUuid Category { get; set; }
+        public EntityWithUuid Account { get; set; }
     }
 }

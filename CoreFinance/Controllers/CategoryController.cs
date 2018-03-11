@@ -46,7 +46,7 @@ namespace CoreFinance.Controllers
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var group = _groupRepository.Get(categoryViewModel.GroupUuid, categoryViewModel.PropertyUuid);
+            var group = _groupRepository.Get(categoryViewModel.Group.Uuid, categoryViewModel.PropertyUuid);
 
             var category = new Category(categoryViewModel.PropertyUuid,
                                         categoryViewModel.Name,
@@ -63,7 +63,7 @@ namespace CoreFinance.Controllers
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var group = _groupRepository.Get(categoryViewModel.GroupUuid, categoryViewModel.PropertyUuid);
+            var group = _groupRepository.Get(categoryViewModel.Group.Uuid, categoryViewModel.PropertyUuid);
 
             _updateCategoryService.Update(uuid, categoryViewModel.PropertyUuid, categoryViewModel.Name,
                             (CategoryType)categoryViewModel.CategoryType,
