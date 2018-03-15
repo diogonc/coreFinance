@@ -10,10 +10,14 @@ namespace CoreFinance.Controllers
     public class OwnerController : Controller
     {
         private IOwnerRepository _ownerRepository;
+        private UpdateOwnerService _updateOwnerService;
+        private DeleteOwnerService _deleteOwnerService;
 
-        public OwnerController(IOwnerRepository ownerRepository)
+        public OwnerController(IOwnerRepository ownerRepository, UpdateOwnerService updateOwnerService, DeleteOwnerService deleteOwnerService)
         {
             _ownerRepository = ownerRepository;
+            _updateOwnerService = updateOwnerService;
+            _deleteOwnerService = deleteOwnerService;
         }
 
         [HttpGet("")]
@@ -34,7 +38,7 @@ namespace CoreFinance.Controllers
         public CreatedViewModel Post([FromBody]OwnerViewModel ownerViewModel)
         {
             ownerViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var owner = new Owner(ownerViewModel.PropertyUuid, ownerViewModel.Name, ownerViewModel.Priority);
+            var owner = new Owner(ownerViewModel.PropertyUuid, ownerViewModel.UserUuid, ownerViewModel.Name, ownerViewModel.Priority);
             _ownerRepository.Create(owner);
 
             return new CreatedViewModel(owner.Uuid);
@@ -45,11 +49,7 @@ namespace CoreFinance.Controllers
         {
             ownerViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var owner = _ownerRepository.Get(uuid, ownerViewModel.PropertyUuid);
-            
-            owner.Update(ownerViewModel.Name, ownerViewModel.Priority);
-
-            _ownerRepository.Update(owner);
+            _updateOwnerService.Update(uuid, ownerViewModel.PropertyUuid, ownerViewModel.UserUuid, ownerViewModel.Name, ownerViewModel.Priority);
 
             return Ok();
         }
@@ -58,7 +58,8 @@ namespace CoreFinance.Controllers
         public ActionResult Delete(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
-            _ownerRepository.Delete(uuid, propertyUuid);
+
+            _deleteOwnerService.Delete(uuid, propertyUuid);
 
             return Ok();
         }

@@ -10,7 +10,7 @@ namespace DomainTest
         [Fact]
         public void ShouldCreateAnOwner()
         {
-            var owner = new Owner("2342", "name", 3);
+            var owner = new Owner("2342", "7",  "name", 3);
 
             Assert.True(owner != null);
         }
@@ -18,19 +18,20 @@ namespace DomainTest
         [Fact]
         public void ShouldValidate()
         {
-            var exception = Assert.Throws<DomainException<Owner>>(() => new Owner(null, null, 0));
+            var exception = Assert.Throws<DomainException<Owner>>(() => new Owner(null, null, null, 0));
 
-            Assert.Equal("Propriedade é obrigatória\nNome é obrigatório\nPrioridade é obrigatória\n", exception.Message);
+            Assert.Equal("Propriedade é obrigatória\nUsuario é obrigatório\nNome é obrigatório\nPrioridade é obrigatória\n", exception.Message);
         }
 
         [Fact]
         public void ShouldUpdate()
         {
-            var owner = new Owner("24234", "name", 4);
+            var owner = new Owner("24234", "7",  "name", 4);
 
-            owner.Update("new name", 6);
+            owner.Update("new name", "8",  6);
 
             Assert.Equal("new name", owner.Name);
+            Assert.Equal("8", owner.UserUuid);
             Assert.Equal(6, owner.Priority);
         }
     }

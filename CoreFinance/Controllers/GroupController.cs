@@ -11,10 +11,15 @@ namespace CoreFinance.Controllers
     public class GroupController : Controller
     {
         private IGroupRepository _groupRepository;
+        private UpdateGroupService _updateGroupService;
+        private DeleteGroupService _deleteGroupService;
 
-        public GroupController(IGroupRepository groupRepository)
+        public GroupController(IGroupRepository groupRepository, UpdateGroupService updateGroupService,
+                               DeleteGroupService deleteGroupService)
         {
             _groupRepository = groupRepository;
+            _updateGroupService = updateGroupService;
+            _deleteGroupService = deleteGroupService;
         }
 
         [HttpGet("")]
@@ -46,10 +51,8 @@ namespace CoreFinance.Controllers
         {
             groupViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
+            _updateGroupService.Update(uuid, groupViewModel.PropertyUuid, groupViewModel.Name, groupViewModel.Priority);
             var group = _groupRepository.Get(uuid, groupViewModel.PropertyUuid);
-
-            //TODO: validate category
-            group.Update(groupViewModel.Name, groupViewModel.Priority);
 
             _groupRepository.Update(group);
 
@@ -60,7 +63,8 @@ namespace CoreFinance.Controllers
         public ActionResult Delete(string uuid)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
-            _groupRepository.Delete(uuid, propertyUuid);
+
+            _deleteGroupService.Delete(uuid, propertyUuid);
 
             return Ok();
         }

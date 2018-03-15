@@ -8,13 +8,15 @@ namespace Domain.Categories
         private readonly ICategoryRepository _categoryRepository;
         private readonly ITransactionRepository _transactionRepository;
 
+        public UpdateCategoryService()  {}
+
         public UpdateCategoryService(ICategoryRepository categoryRepository, ITransactionRepository transactionRepository)
         {
             _categoryRepository = categoryRepository;
             _transactionRepository = transactionRepository;
         }
 
-        public void Update(string uuid, string propertyUuid, string name, CategoryType categoryType, Group group, int priority)
+        public virtual void Update(string uuid, string propertyUuid, string name, CategoryType categoryType, Group group, int priority)
         {
             var category = _categoryRepository.Get(uuid, propertyUuid);
 

@@ -18,10 +18,14 @@ namespace CoreFinance
             services.AddSingleton<IGroupRepository, GroupRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IOwnerRepository, OwnerRepository>();
-            services.AddSingleton<Domain.Accounts.UpdateAccountService, Domain.Accounts.UpdateAccountService>();
+            services.AddSingleton<UpdateAccountService, UpdateAccountService>();
             services.AddSingleton<DeleteAccountService, DeleteAccountService>();
-            services.AddSingleton<Domain.Categories.UpdateCategoryService, Domain.Categories.UpdateCategoryService>();
+            services.AddSingleton<UpdateCategoryService, UpdateCategoryService>();
             services.AddSingleton<DeleteCategoryService, DeleteCategoryService>();
+            services.AddSingleton<UpdateOwnerService, UpdateOwnerService>();
+            services.AddSingleton<DeleteOwnerService, DeleteOwnerService>();
+            services.AddSingleton<UpdateGroupService, UpdateGroupService>();
+            services.AddSingleton<DeleteGroupService, DeleteGroupService>();
             services.AddSingleton<MigrateTransactions, MigrateTransactions>();
         }
     }

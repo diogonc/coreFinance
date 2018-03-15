@@ -12,7 +12,7 @@ namespace DomainTest
 
         public AccountTest()
         {
-            _owner = new Owner("2341", "Diogon", 1);
+            _owner = new Owner("2341", "7", "Diogonc", 1);
         }
 
         [Fact]

@@ -25,7 +25,7 @@ namespace DomainTest.Accounts
             _updateAccountService = new UpdateAccountService(_accountRepository.Object, _transactionRepository.Object);
 
             _account = AccountBuilder.AnAccount().Build();
-            _owner = new Owner(_account.PropertyUuid, "luis", 9);
+            _owner = new Owner(_account.PropertyUuid, "7", "luis", 9);
             _accountRepository.Setup(repository => repository.Get(_account.Uuid, _account.PropertyUuid)).Returns(_account);
 
         }
