@@ -31,7 +31,7 @@ namespace DomainTest
             owner.Update("new name", "8",  6);
 
             Assert.Equal("new name", owner.Name);
-            Assert.Equal("8", owner.UserUuid);
+            Assert.Equal("8", owner.UserLogin);
             Assert.Equal(6, owner.Priority);
         }
     }

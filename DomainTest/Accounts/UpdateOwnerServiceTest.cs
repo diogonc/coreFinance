@@ -35,7 +35,7 @@ namespace DomainTest.Categories
         [Fact]
         public void ShouldUpdateAnOwner()
         {
-            _updateOwnerService.Update(_owner.Uuid, _owner.PropertyUuid, _owner.UserUuid, "new name", 2);
+            _updateOwnerService.Update(_owner.Uuid, _owner.PropertyUuid, _owner.UserLogin, "new name", 2);
 
             Assert.Equal("new name", _owner.Name);
             _ownerRepository.Verify(repository => repository.Update(_owner), Times.Once);
@@ -53,7 +53,7 @@ namespace DomainTest.Categories
             _accountRepository.Setup(repository => repository.GetFromOwner(_owner.PropertyUuid, _owner.Uuid))
                                   .Returns(accounts);
 
-            _updateOwnerService.Update(_owner.Uuid, _owner.PropertyUuid, _owner.UserUuid, "new name", 2);
+            _updateOwnerService.Update(_owner.Uuid, _owner.PropertyUuid, _owner.UserLogin, "new name", 2);
 
             _updateAccountService.Verify(service => service.Update(firstAccount.Uuid, firstAccount.PropertyUuid, firstAccount.Name
                      , firstAccount.Priority, It.Is<Owner>(owner => owner.Name == "new name"))

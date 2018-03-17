@@ -7,17 +7,17 @@ namespace Domain.Accounts
     {
         public string Uuid { get; set; }
         public string PropertyUuid { get; set; }
-        public string UserUuid { get; set; }
+        public string UserLogin { get; set; }
         public string Name { get; set; }
         public int Priority { get; set; }
 
-        public Owner(string propertyUuid, string userUuid, string name, int priority)
+        public Owner(string propertyUuid, string userLogin, string name, int priority)
         {
-            Validate(propertyUuid, userUuid, name, priority);
+            Validate(propertyUuid, userLogin, name, priority);
 
             Uuid = Guid.NewGuid().ToString();
             PropertyUuid = propertyUuid;
-            UserUuid = userUuid;
+            UserLogin = userLogin;
             Name = name;
             Priority = priority;
         }
@@ -27,7 +27,7 @@ namespace Domain.Accounts
             Validate(PropertyUuid, userUuid, name, priority);
 
             Name = name;
-            UserUuid = userUuid;
+            UserLogin = userUuid;
             Priority = priority;
         }
 

@@ -52,10 +52,7 @@ namespace CoreFinance.Controllers
             groupViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
             _updateGroupService.Update(uuid, groupViewModel.PropertyUuid, groupViewModel.Name, groupViewModel.Priority);
-            var group = _groupRepository.Get(uuid, groupViewModel.PropertyUuid);
-
-            _groupRepository.Update(group);
-
+            
             return Ok();
         }
 
