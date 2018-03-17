@@ -22,20 +22,20 @@ namespace Domain.Accounts
             Priority = priority;
         }
 
-        public void Update(string name, string userUuid, int priority)
+        public void Update(string name, string userLogin, int priority)
         {
-            Validate(PropertyUuid, userUuid, name, priority);
+            Validate(PropertyUuid, userLogin, name, priority);
 
             Name = name;
-            UserLogin = userUuid;
+            UserLogin = userLogin;
             Priority = priority;
         }
 
-        private void Validate(string propertyUuid, string userUuid, string name, int priority)
+        private void Validate(string propertyUuid, string userLogin, string name, int priority)
         {
             Validations<Owner>.Build()
                                .When(propertyUuid == null, "Propriedade é obrigatória")
-                               .When(userUuid == null, "Usuario é obrigatório")
+                               .When(userLogin == null, "Usuario é obrigatório")
                                .When(name == null, "Nome é obrigatório")
                                .When(priority == 0, "Prioridade é obrigatória")
                                .Thwros();

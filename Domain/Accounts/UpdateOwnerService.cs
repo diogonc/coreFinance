@@ -16,11 +16,11 @@ namespace Domain.Accounts
             _updateAccountService = updateAccountService;
         }
 
-        public void Update(string uuid, string propertyUuid, string ownerUuid,  string name, int priority)
+        public void Update(string uuid, string propertyUuid, string userLogin,  string name, int priority)
         {
             var owner = _ownerRepository.Get(uuid, propertyUuid);
 
-            owner.Update(name, ownerUuid, priority);
+            owner.Update(name, userLogin, priority);
 
             var accounts = _accountRepository.GetFromOwner(propertyUuid, owner.Uuid);
             foreach (var account in accounts)
