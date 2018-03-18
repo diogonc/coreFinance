@@ -5,6 +5,6 @@
         public string PropertyUuid { get; set; }
         public string Name { get; set; }
         public int Priority { get; set; }
-        public string OwnerUuid { get; set;}
+        public EntityWithUuid Owner { get; set;}
     }
 }

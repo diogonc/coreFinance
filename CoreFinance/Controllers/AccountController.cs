@@ -41,7 +41,7 @@ namespace CoreFinance.Controllers
         public CreatedViewModel Post([FromBody]AccountViewModel accountViewModel)
         {
             accountViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var owner = _ownerRepository.Get(accountViewModel.OwnerUuid, accountViewModel.PropertyUuid);
+            var owner = _ownerRepository.Get(accountViewModel.Owner.Uuid, accountViewModel.PropertyUuid);
             var account = new Account(accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority, owner);
             _accountRepository.Create(account);
 
@@ -53,8 +53,9 @@ namespace CoreFinance.Controllers
         {
             accountViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var owner = _ownerRepository.Get(accountViewModel.OwnerUuid, accountViewModel.PropertyUuid);
-            _updateAccountService.Update(uuid, accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority, owner);
+            var owner = _ownerRepository.Get(accountViewModel.Owner.Uuid, accountViewModel.PropertyUuid);
+            _updateAccountService.Update(uuid, accountViewModel.PropertyUuid, accountViewModel.Name,
+                                    accountViewModel.Priority, owner);
 
             return Ok();
         }
