@@ -1,12 +1,12 @@
 {
-    "name": "corefinance",
-    "version": "1.2.0",
-    "license": "MIT",
-    "scripts": {
-        "test": "dotnet test DomainTest/DomainTest.csproj",
-        "build": "dotnet build",
-        "clean": "dotnet clean",
-        "serve": "cd CoreFinance; dotnet run"
-    },
-    "private": true
+  "name": "corefinance",
+  "version": "1.2.0",
+  "license": "MIT",
+  "scripts": {
+    "test": "dotnet test DomainTest/DomainTest.csproj",
+    "build": "dotnet build",
+    "clean": "dotnet clean",
+    "serve": "cd CoreFinance &&  dotnet run"
+  },
+  "private": true
 }
