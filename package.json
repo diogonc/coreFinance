@@ -6,7 +6,9 @@
     "test": "dotnet test DomainTest/DomainTest.csproj",
     "build": "dotnet build",
     "clean": "dotnet clean",
-    "serve": "cd CoreFinance &&  dotnet run"
+    "serve": "cd CoreFinance &&  dotnet run",
+    "createMigration" : "cd MigrationTools && dotnet ef migrations add InitialMigration -s ../CoreFinance/",
+    "migrate" : "cd MigrationTools && dotnet ef database update"
   },
   "private": true
 }

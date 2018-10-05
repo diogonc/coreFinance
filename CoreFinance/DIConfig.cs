@@ -4,7 +4,6 @@ using Domain.Repositories;
 using Infra.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
-using MigrationsTools;
 
 namespace CoreFinance
 {
@@ -26,7 +25,6 @@ namespace CoreFinance
             services.AddSingleton<DeleteOwnerService, DeleteOwnerService>();
             services.AddSingleton<UpdateGroupService, UpdateGroupService>();
             services.AddSingleton<DeleteGroupService, DeleteGroupService>();
-            services.AddSingleton<MigrateTransactions, MigrateTransactions>();
         }
     }
 }

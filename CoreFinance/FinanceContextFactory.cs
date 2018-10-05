@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
 
 namespace CoreFinance
 {
@@ -9,7 +10,7 @@ namespace CoreFinance
         public FinanceContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<FinanceContext>();
-            optionsBuilder.UseSqlite("Data Source=finance.db");
+            optionsBuilder.UseSqlite("Data Source=finance.db", b => b.MigrationsAssembly("MigrationTools"));
 
             return new FinanceContext(optionsBuilder.Options);
         }

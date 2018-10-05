@@ -3675,22 +3675,6 @@
         "runtime": {
           "bin/placeholder/Infra.dll": {}
         }
-      },
-      "MigrationsTools/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "dependencies": {
-          "Domain": "1.0.0",
-          "Infra": "1.0.0",
-          "MongoDB.Bson": "2.7.0",
-          "MongoDB.Driver": "2.7.0"
-        },
-        "compile": {
-          "bin/placeholder/MigrationsTools.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/MigrationsTools.dll": {}
-        }
       }
     }
   },
@@ -10297,11 +10281,6 @@
       "type": "project",
       "path": "../Infra/Infra.csproj",
       "msbuildProject": "../Infra/Infra.csproj"
-    },
-    "MigrationsTools/1.0.0": {
-      "type": "project",
-      "path": "../MigrationsTools/MigrationsTools.csproj",
-      "msbuildProject": "../MigrationsTools/MigrationsTools.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -10313,7 +10292,6 @@
       "Microsoft.EntityFrameworkCore.Design >= 2.1.4",
       "Microsoft.EntityFrameworkCore.Sqlite >= 2.1.4",
       "Microsoft.NETCore.App >= 2.1.0",
-      "MigrationsTools >= 1.0.0",
       "MongoDB.Driver >= 2.7.0"
     ]
   },
@@ -10352,9 +10330,6 @@
             },
             "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\Infra\\Infra.csproj": {
               "projectPath": "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\Infra\\Infra.csproj"
-            },
-            "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\MigrationsTools\\MigrationsTools.csproj": {
-              "projectPath": "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\MigrationsTools\\MigrationsTools.csproj"
             }
           }
         }

@@ -3,7 +3,7 @@ using Domain;
 using Domain.Categories;
 using Domain.Accounts;
 
-namespace MigrationsTools
+namespace MigrationTools
 {
     public class TransactionToMigrate
     {

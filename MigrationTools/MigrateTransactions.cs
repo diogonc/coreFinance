@@ -9,7 +9,7 @@ using MongoDB.Bson.Serialization;
 using System;
 using MongoDB.Bson;
 
-namespace MigrationsTools
+namespace MigrationTools
 {
     public class MigrateTransactions
     {
