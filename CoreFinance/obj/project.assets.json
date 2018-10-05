@@ -958,6 +958,22 @@
       "Microsoft.EntityFrameworkCore.Analyzers/2.1.4": {
         "type": "package"
       },
+      "Microsoft.EntityFrameworkCore.Design/2.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "Microsoft.EntityFrameworkCore.Relational": "2.1.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {}
+        },
+        "build": {
+          "build/netcoreapp2.0/Microsoft.EntityFrameworkCore.Design.props": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/2.1.4": {
         "type": "package",
         "dependencies": {
@@ -3660,7 +3676,7 @@
           "bin/placeholder/Infra.dll": {}
         }
       },
-      "Migration/1.0.0": {
+      "MigrationsTools/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
@@ -3670,10 +3686,10 @@
           "MongoDB.Driver": "2.7.0"
         },
         "compile": {
-          "bin/placeholder/Migration.dll": {}
+          "bin/placeholder/MigrationsTools.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Migration.dll": {}
+          "bin/placeholder/MigrationsTools.dll": {}
         }
       }
     }
@@ -4523,6 +4539,22 @@
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "microsoft.entityframeworkcore.analyzers.2.1.4.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.Design/2.1.4": {
+      "sha512": "oQ9riABU2UiAE0aj1/yRZx58dvyTsmmSL2tgASrhYxwHeAAEO9is1OavrdjC6hDc+t/M0/PsJ8GFyRp8cedlWg==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.design/2.1.4",
+      "files": [
+        ".signature.p7s",
+        "build/net461/Microsoft.EntityFrameworkCore.Design.props",
+        "build/netcoreapp2.0/Microsoft.EntityFrameworkCore.Design.props",
+        "lib/net461/Microsoft.EntityFrameworkCore.Design.dll",
+        "lib/net461/Microsoft.EntityFrameworkCore.Design.xml",
+        "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll",
+        "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.xml",
+        "microsoft.entityframeworkcore.design.2.1.4.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/2.1.4": {
@@ -10266,10 +10298,10 @@
       "path": "../Infra/Infra.csproj",
       "msbuildProject": "../Infra/Infra.csproj"
     },
-    "Migration/1.0.0": {
+    "MigrationsTools/1.0.0": {
       "type": "project",
-      "path": "../Migration/Migration.csproj",
-      "msbuildProject": "../Migration/Migration.csproj"
+      "path": "../MigrationsTools/MigrationsTools.csproj",
+      "msbuildProject": "../MigrationsTools/MigrationsTools.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -10278,9 +10310,10 @@
       "Infra >= 1.0.0",
       "Microsoft.AspNetCore >= 2.1.4",
       "Microsoft.AspNetCore.Mvc >= 2.1.3",
+      "Microsoft.EntityFrameworkCore.Design >= 2.1.4",
       "Microsoft.EntityFrameworkCore.Sqlite >= 2.1.4",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Migration >= 1.0.0",
+      "MigrationsTools >= 1.0.0",
       "MongoDB.Driver >= 2.7.0"
     ]
   },
@@ -10320,8 +10353,8 @@
             "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\Infra\\Infra.csproj": {
               "projectPath": "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\Infra\\Infra.csproj"
             },
-            "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\Migration\\Migration.csproj": {
-              "projectPath": "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\Migration\\Migration.csproj"
+            "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\MigrationsTools\\MigrationsTools.csproj": {
+              "projectPath": "C:\\Users\\diogocampanha\\Documents\\projetos\\coreFinance\\MigrationsTools\\MigrationsTools.csproj"
             }
           }
         }
@@ -10342,6 +10375,10 @@
           "Microsoft.AspNetCore.Mvc": {
             "target": "Package",
             "version": "[2.1.3, )"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "target": "Package",
+            "version": "[2.1.4, )"
           },
           "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",

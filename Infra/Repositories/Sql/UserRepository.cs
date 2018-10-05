@@ -10,7 +10,7 @@ namespace Infra.Repositories.Sql
     {
         public bool Exists(string username, string password, string propertyUuid)
         {
-return true;
+            return true;
         }
     }
 }

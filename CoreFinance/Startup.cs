@@ -25,12 +25,10 @@ namespace CoreFinance
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddDbContext<FinanceContext>();
             services.AddMongo(Configuration.GetSection("Mongo"));
             services.AddDIConfig();
             services.AddCors();
-            
-            var connection = "Data Source=finance.db";
-            services.AddDbContext<FinanceContext>(options => options.UseSqlite(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

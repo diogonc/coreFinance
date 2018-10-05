@@ -2,14 +2,19 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
-namespace Infra.Repositories.Sql
+namespace CoreFinance
 {
     public class FinanceContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
+
         public FinanceContext(DbContextOptions<FinanceContext> options)
             : base(options)
         { }
 
-        public DbSet<User> Users { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasKey(user => user.Uuid);
+        }
     }
 }

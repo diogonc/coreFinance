@@ -4,7 +4,7 @@ using Domain.Repositories;
 using Infra.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
-using Migration;
+using MigrationsTools;
 
 namespace CoreFinance
 {
