@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Infra.Repositories.Sql;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoreFinance
@@ -25,7 +24,6 @@ namespace CoreFinance
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<FinanceContext>();
             services.AddMongo(Configuration.GetSection("Mongo"));
             services.AddDIConfig();
             services.AddCors();

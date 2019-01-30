@@ -3665,7 +3665,6 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "Domain": "1.0.0",
-          "Microsoft.EntityFrameworkCore.Sqlite": "2.1.4",
           "MongoDB.Bson": "2.7.0",
           "MongoDB.Driver": "2.7.0"
         },
