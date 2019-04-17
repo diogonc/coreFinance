@@ -22,7 +22,8 @@ namespace CoreFinance.Middleware
             var token = context.Request.Headers["token"];
             var propertyuuid = context.Request.Headers["propertyuuid"];
 
-            if (IsNull(username, token, propertyuuid) || !_userRepository.Exists(username, token, propertyuuid))
+            var isAPI = context.Request.Path.Value.IndexOf("api/") >= 0;
+            if (isAPI && (IsNull(username, token, propertyuuid) || !_userRepository.Exists(username, token, propertyuuid)))
             {
                 context.Response.StatusCode = 401;
                 return;
