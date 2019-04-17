@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Domain.Helpers.Validation
+namespace CoreFinance.Domain.Helpers.Validation
 {
     public class DomainException : Exception
     {

@@ -1,5 +1,5 @@
-﻿using Domain;
-using Domain.Repositories;
+﻿using CoreFinance.Domain;
+using CoreFinance.Domain.Repositories;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;

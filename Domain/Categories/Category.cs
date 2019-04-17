@@ -1,7 +1,7 @@
 ﻿using System;
-using Domain.Helpers.Validation;
+using CoreFinance.Domain.Helpers.Validation;
 
-namespace Domain.Categories
+namespace CoreFinance.Domain.Categories
 {
     public class Category : Model
     {

@@ -1,6 +1,6 @@
-﻿using Domain.Accounts;
+﻿using CoreFinance.Domain.Accounts;
 
-namespace Domain.Repositories
+namespace CoreFinance.Domain.Repositories
 {
     public interface IOwnerRepository : IRepository<Owner>
     {

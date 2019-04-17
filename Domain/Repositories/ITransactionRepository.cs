@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Domain.Repositories
+namespace CoreFinance.Domain.Repositories
 {
     public interface ITransactionRepository : IRepository<Transaction>
     {

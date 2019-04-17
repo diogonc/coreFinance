@@ -1,5 +1,5 @@
-﻿using Domain.Accounts;
-using Domain.Repositories;
+﻿using CoreFinance.Domain.Accounts;
+using CoreFinance.Domain.Repositories;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 

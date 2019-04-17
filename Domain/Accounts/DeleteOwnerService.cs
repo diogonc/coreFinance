@@ -1,8 +1,8 @@
 using System.Linq;
-using Domain.Helpers.Validation;
-using Domain.Repositories;
+using CoreFinance.Domain.Helpers.Validation;
+using CoreFinance.Domain.Repositories;
 
-namespace Domain.Accounts
+namespace CoreFinance.Domain.Accounts
 {
     public class DeleteOwnerService
     {
@@ -19,7 +19,7 @@ namespace Domain.Accounts
         public void Delete(string uuid, string propertyUuid)
         {
             var accounts = _accountRepository.GetFromOwner(propertyUuid, uuid);
-            if(accounts.Any())
+            if (accounts.Any())
                 return;
 
             Validations<DeleteOwnerService>.Build()

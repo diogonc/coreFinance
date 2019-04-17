@@ -1,8 +1,8 @@
 using System.Linq;
-using Domain.Helpers.Validation;
-using Domain.Repositories;
+using CoreFinance.Domain.Helpers.Validation;
+using CoreFinance.Domain.Repositories;
 
-namespace Domain.Categories
+namespace CoreFinance.Domain.Categories
 {
     public class DeleteCategoryService
     {
@@ -19,9 +19,9 @@ namespace Domain.Categories
         public void Delete(string uuid, string propertyUuid)
         {
             var transactions = _transactionRepository.GetFromCategory(propertyUuid, uuid);
-            if(transactions.Any())
+            if (transactions.Any())
                 return;
-                
+
             Validations<DeleteCategoryService>.Build()
                             .When(transactions.Any(), "Categoria não pode ser excluída pois existem transações vinculadas a ela")
                             .Thwros();

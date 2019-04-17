@@ -1,8 +1,8 @@
 using System.Linq;
-using Domain.Helpers.Validation;
-using Domain.Repositories;
+using CoreFinance.Domain.Helpers.Validation;
+using CoreFinance.Domain.Repositories;
 
-namespace Domain.Categories
+namespace CoreFinance.Domain.Categories
 {
     public class DeleteGroupService
     {
@@ -19,9 +19,9 @@ namespace Domain.Categories
         public void Delete(string uuid, string propertyUuid)
         {
             var categories = _categoryRepository.GetFromGroup(propertyUuid, uuid);
-            if(categories.Any())
+            if (categories.Any())
                 return;
-                
+
             Validations<DeleteGroupService>.Build()
                             .When(categories.Any(), "Agrupamento de categoria não pode ser excluída pois existem categorias vinculadas a ela")
                             .Thwros();

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Domain
+namespace CoreFinance.Domain
 {
     public static class EnumerationExtension
     {

@@ -1,7 +1,7 @@
 using System;
-using Domain.Repositories;
+using CoreFinance.Domain.Repositories;
 
-namespace Domain.Accounts
+namespace CoreFinance.Domain.Accounts
 {
     public class UpdateOwnerService
     {
@@ -16,7 +16,7 @@ namespace Domain.Accounts
             _updateAccountService = updateAccountService;
         }
 
-        public void Update(string uuid, string propertyUuid, string userLogin,  string name, int priority)
+        public void Update(string uuid, string propertyUuid, string userLogin, string name, int priority)
         {
             var owner = _ownerRepository.Get(uuid, propertyUuid);
 

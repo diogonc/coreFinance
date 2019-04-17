@@ -1,7 +1,7 @@
 ﻿using System;
-using Domain.Helpers.Validation;
+using CoreFinance.Domain.Helpers.Validation;
 
-namespace Domain.Accounts
+namespace CoreFinance.Domain.Accounts
 {
     public class Account : Model
     {
@@ -9,7 +9,7 @@ namespace Domain.Accounts
         public string PropertyUuid { get; set; }
         public string Name { get; set; }
         public int Priority { get; set; }
-        public Owner Owner {get; set;}
+        public Owner Owner { get; set; }
 
         public Account(string propertyUuid, string name, int priority, Owner owner)
         {

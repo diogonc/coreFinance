@@ -1,7 +1,7 @@
 using System;
-using Domain.Repositories;
+using CoreFinance.Domain.Repositories;
 
-namespace Domain.Accounts
+namespace CoreFinance.Domain.Accounts
 {
     public class UpdateAccountService
     {

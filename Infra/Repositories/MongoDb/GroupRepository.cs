@@ -1,6 +1,6 @@
-using Domain;
-using Domain.Repositories;
-using Domain.Categories;
+using CoreFinance.Domain;
+using CoreFinance.Domain.Repositories;
+using CoreFinance.Domain.Categories;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 

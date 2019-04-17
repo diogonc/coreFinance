@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Domain.Helpers.Validation
+namespace CoreFinance.Domain.Helpers.Validation
 {
     public class Validations<T> where T : class
     {

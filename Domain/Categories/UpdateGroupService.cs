@@ -1,7 +1,7 @@
 using System;
-using Domain.Repositories;
+using CoreFinance.Domain.Repositories;
 
-namespace Domain.Categories
+namespace CoreFinance.Domain.Categories
 {
     public class UpdateGroupService
     {
@@ -21,9 +21,10 @@ namespace Domain.Categories
             var group = _groupRepository.Get(uuid, propertyUuid);
 
             group.Update(name, priority);
-            
+
             var categories = _categoryRepository.GetFromGroup(propertyUuid, group.Uuid);
-            foreach(var category in categories){
+            foreach (var category in categories)
+            {
                 _updateCategoryService.Update(category.Uuid, propertyUuid, category.Name, category.CategoryType, group, category.Priority);
             }
 

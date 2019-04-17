@@ -1,14 +1,14 @@
 using System;
-using Domain.Repositories;
+using CoreFinance.Domain.Repositories;
 
-namespace Domain.Categories
+namespace CoreFinance.Domain.Categories
 {
     public class UpdateCategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly ITransactionRepository _transactionRepository;
 
-        public UpdateCategoryService()  {}
+        public UpdateCategoryService() { }
 
         public UpdateCategoryService(ICategoryRepository categoryRepository, ITransactionRepository transactionRepository)
         {
@@ -31,7 +31,7 @@ namespace Domain.Categories
         {
             var transactions = _transactionRepository.GetFromCategory(category.PropertyUuid, category.Uuid);
 
-            foreach(var transaction in transactions)
+            foreach (var transaction in transactions)
             {
                 transaction.UpdateCategory(category);
                 _transactionRepository.Update(transaction);

@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Domain.Categories
+namespace CoreFinance.Domain.Categories
 {
     public enum CategoryType
     {

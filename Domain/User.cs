@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain
+namespace CoreFinance.Domain
 {
     public class User : Model
     {
@@ -19,8 +19,8 @@ namespace Domain
 
         public void Update(string username, string password)
         {
-           Username = username;
-           Password = password;
+            Username = username;
+            Password = password;
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
-using Domain.Accounts;
-using Domain.Categories;
-using Domain.Helpers.Validation;
+using CoreFinance.Domain.Accounts;
+using CoreFinance.Domain.Categories;
+using CoreFinance.Domain.Helpers.Validation;
 
-namespace Domain
+namespace CoreFinance.Domain
 {
     public class Transaction : Model
     {

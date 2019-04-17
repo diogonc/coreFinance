@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Domain;
-using Domain.Repositories;
+using CoreFinance.Domain;
+using CoreFinance.Domain.Repositories;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
@@ -36,7 +36,7 @@ namespace Infra.Repositories
             return cursor.Result;
         }
 
-          public IEnumerable<Transaction> GetFromAccount(string propertyUuid, string accountUuid)
+        public IEnumerable<Transaction> GetFromAccount(string propertyUuid, string accountUuid)
         {
             var builder = Builders<Transaction>.Filter;
             var filter = builder.Eq(transaction => transaction.PropertyUuid, propertyUuid) & builder.Eq(transaction => transaction.Account.Uuid, accountUuid);

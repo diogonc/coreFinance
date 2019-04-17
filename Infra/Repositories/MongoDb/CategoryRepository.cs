@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Domain;
-using Domain.Categories;
-using Domain.Repositories;
+using CoreFinance.Domain;
+using CoreFinance.Domain.Categories;
+using CoreFinance.Domain.Repositories;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 

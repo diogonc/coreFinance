@@ -1,6 +1,6 @@
-﻿using Domain.Accounts;
-using Domain;
-using Domain.Repositories;
+﻿using CoreFinance.Domain.Accounts;
+using CoreFinance.Domain;
+using CoreFinance.Domain.Repositories;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System.Collections.Generic;

@@ -1,14 +1,11 @@
 {
-  "name": "corefinance",
-  "version": "1.2.0",
-  "license": "MIT",
+  "name": "core-finance",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "dotnet test DomainTest/DomainTest.csproj",
-    "build": "dotnet build",
-    "clean": "dotnet clean",
-    "serve": "cd CoreFinance &&  dotnet run",
-    "createMigration" : "cd MigrationTools && dotnet ef migrations add InitialMigration -s ../CoreFinance/",
-    "migrate" : "cd MigrationTools && dotnet ef database update"
-  },
-  "private": true
+    "start": "dotnet run",
+    "build": "cd ClientApp && npm run build && cd ../ && dotnet build",
+    "test": "dotnet test CoreFinance.csproj",
+    "clean": "dotnet clean"
+  }
 }

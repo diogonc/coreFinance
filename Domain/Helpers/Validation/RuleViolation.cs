@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Domain.Helpers.Validation
+namespace CoreFinance.Domain.Helpers.Validation
 {
     public class RuleViolation
     {

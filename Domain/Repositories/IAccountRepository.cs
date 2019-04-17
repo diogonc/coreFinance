@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Domain.Accounts;
+using CoreFinance.Domain.Accounts;
 
-namespace Domain.Repositories
+namespace CoreFinance.Domain.Repositories
 {
     public interface IAccountRepository : IRepository<Account>
     {

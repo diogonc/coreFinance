@@ -1,6 +1,6 @@
-using Domain.Categories;
+using CoreFinance.Domain.Categories;
 
-namespace Domain.Repositories
+namespace CoreFinance.Domain.Repositories
 {
     public interface IGroupRepository : IRepository<Group>
     { }
