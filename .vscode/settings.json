@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/264971e3-484e-4a38-9080-7d5db2a0dac1/resourceGroups/Default-Web-BrazilSouth/providers/Microsoft.Web/sites/coreFinance",
+    "appService.deploySubpath": ""
+}
