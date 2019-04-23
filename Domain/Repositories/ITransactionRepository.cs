@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CoreFinance.Domain.Repositories
 {
@@ -6,5 +7,6 @@ namespace CoreFinance.Domain.Repositories
     {
         IEnumerable<Transaction> GetFromCategory(string propertyUuid, string categoryUuid);
         IEnumerable<Transaction> GetFromAccount(string propertyUuid, string accountUuid);
+        IEnumerable<Transaction> GetFromDate(string propertyUuid, DateTime? startDate, DateTime? finishDate);
     }
 }

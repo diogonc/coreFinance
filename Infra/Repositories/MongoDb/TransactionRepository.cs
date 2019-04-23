@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CoreFinance.Domain;
 using CoreFinance.Domain.Repositories;
 using MongoDB.Bson.Serialization;
@@ -40,6 +41,20 @@ namespace Infra.Repositories
         {
             var builder = Builders<Transaction>.Filter;
             var filter = builder.Eq(transaction => transaction.PropertyUuid, propertyUuid) & builder.Eq(transaction => transaction.Account.Uuid, accountUuid);
+
+            var cursor = _collection.Find(filter).ToListAsync();
+            cursor.Wait();
+            return cursor.Result;
+        }
+
+        public IEnumerable<Transaction> GetFromDate(string propertyUuid, DateTime? startDate, DateTime? finishDate)
+        {
+            var builder = Builders<Transaction>.Filter;
+            var filter = builder.Eq(transaction => transaction.PropertyUuid, propertyUuid);
+            if (startDate != null)
+                filter &= builder.Gt(transaction => transaction.Date, startDate);
+            if (finishDate != null)
+                filter &= builder.Lte(transaction => transaction.Date, finishDate);
 
             var cursor = _collection.Find(filter).ToListAsync();
             cursor.Wait();

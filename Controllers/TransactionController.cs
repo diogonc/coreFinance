@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CoreFinance.Domain.Repositories;
 using CoreFinance.Domain;
 using CoreFinance.ViewModels;
+using System;
 
 namespace CoreFinance.Controllers
 {
@@ -23,10 +24,10 @@ namespace CoreFinance.Controllers
         }
 
         [HttpGet("")]
-        public IEnumerable<Transaction> Get()
+        public IEnumerable<Transaction> Get(DateTime? startDate = null, DateTime? finishDate = null)
         {
             var propertyUuid = Request.Headers["propertyuuid"];
-            return _transactionRepository.GetAll(propertyUuid);
+            return _transactionRepository.GetFromDate(propertyUuid, startDate, finishDate);
         }
 
         [HttpGet("{uuid}")]
