@@ -11,12 +11,12 @@ namespace CoreFinance
     {
         public static void AddDIConfig(this IServiceCollection services)
         {
+            services.AddSingleton<IOwnerRepository, OwnerRepository>();
             services.AddSingleton<IAccountRepository, AccountRepository>();
             services.AddSingleton<ICategoryRepository, CategoryRepository>();
             services.AddSingleton<ITransactionRepository, TransactionRepository>();
             services.AddSingleton<IGroupRepository, GroupRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<IOwnerRepository, OwnerRepository>();
             services.AddSingleton<UpdateAccountService, UpdateAccountService>();
             services.AddSingleton<DeleteAccountService, DeleteAccountService>();
             services.AddSingleton<UpdateCategoryService, UpdateCategoryService>();

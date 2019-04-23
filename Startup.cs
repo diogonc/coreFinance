@@ -1,3 +1,4 @@
+using CoreFinance.Filters;
 using CoreFinance.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +22,10 @@ namespace CoreFinance
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new DomainExceptionFilter());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMongo(Configuration.GetSection("Mongo"));
             services.AddDIConfig();
             services.AddCors();
