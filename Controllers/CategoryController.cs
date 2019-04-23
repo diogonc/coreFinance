@@ -46,7 +46,7 @@ namespace CoreFinance.Controllers
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var group = (categoryViewModel.Group != null && string.IsNullOrWhiteSpace(categoryViewModel.Group.Uuid))
+            var group = (categoryViewModel.Group != null && !string.IsNullOrWhiteSpace(categoryViewModel.Group.Uuid))
                     ? _groupRepository.Get(categoryViewModel.Group.Uuid, categoryViewModel.PropertyUuid)
                     : null;
 
@@ -65,7 +65,7 @@ namespace CoreFinance.Controllers
         {
             categoryViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var group = (categoryViewModel.Group != null && string.IsNullOrWhiteSpace(categoryViewModel.Group.Uuid))
+            var group = (categoryViewModel.Group != null && !string.IsNullOrWhiteSpace(categoryViewModel.Group.Uuid))
                 ? _groupRepository.Get(categoryViewModel.Group.Uuid, categoryViewModel.PropertyUuid)
                 : null;
 

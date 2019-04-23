@@ -41,11 +41,11 @@ namespace CoreFinance.Controllers
         {
             transactionViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var account = (transactionViewModel.Account != null && string.IsNullOrWhiteSpace(transactionViewModel.Account.Uuid))
+            var account = (transactionViewModel.Account != null && !string.IsNullOrWhiteSpace(transactionViewModel.Account.Uuid))
                 ? _accountRepository.Get(transactionViewModel.Account.Uuid, transactionViewModel.PropertyUuid)
                 : null;
 
-            var category = (transactionViewModel.Category != null && string.IsNullOrWhiteSpace(transactionViewModel.Category.Uuid))
+            var category = (transactionViewModel.Category != null && !string.IsNullOrWhiteSpace(transactionViewModel.Category.Uuid))
                 ? _categoryRepository.Get(transactionViewModel.Category.Uuid, transactionViewModel.PropertyUuid)
                 : null;
 
@@ -65,11 +65,11 @@ namespace CoreFinance.Controllers
         {
             transactionViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var account = (transactionViewModel.Account != null && string.IsNullOrWhiteSpace(transactionViewModel.Account.Uuid))
+            var account = (transactionViewModel.Account != null && !string.IsNullOrWhiteSpace(transactionViewModel.Account.Uuid))
                            ? _accountRepository.Get(transactionViewModel.Account.Uuid, transactionViewModel.PropertyUuid)
                            : null;
 
-            var category = (transactionViewModel.Category != null && string.IsNullOrWhiteSpace(transactionViewModel.Category.Uuid))
+            var category = (transactionViewModel.Category != null && !string.IsNullOrWhiteSpace(transactionViewModel.Category.Uuid))
                 ? _categoryRepository.Get(transactionViewModel.Category.Uuid, transactionViewModel.PropertyUuid)
                 : null;
 
