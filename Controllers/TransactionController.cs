@@ -41,11 +41,13 @@ namespace CoreFinance.Controllers
         {
             transactionViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var account = _accountRepository.Get(transactionViewModel.Account.Uuid,
-                                                 transactionViewModel.PropertyUuid);
+            var account = (transactionViewModel.Account != null && string.IsNullOrWhiteSpace(transactionViewModel.Account.Uuid))
+                ? _accountRepository.Get(transactionViewModel.Account.Uuid, transactionViewModel.PropertyUuid)
+                : null;
 
-            var category = _categoryRepository.Get(transactionViewModel.Category.Uuid,
-                                                   transactionViewModel.PropertyUuid);
+            var category = (transactionViewModel.Category != null && string.IsNullOrWhiteSpace(transactionViewModel.Category.Uuid))
+                ? _categoryRepository.Get(transactionViewModel.Category.Uuid, transactionViewModel.PropertyUuid)
+                : null;
 
             var transaction = new Transaction(transactionViewModel.PropertyUuid,
                                               transactionViewModel.Date,
@@ -63,21 +65,26 @@ namespace CoreFinance.Controllers
         {
             transactionViewModel.PropertyUuid = Request.Headers["propertyuuid"];
 
-            var account = _accountRepository.Get(transactionViewModel.Account.Uuid,
-                                                 transactionViewModel.PropertyUuid);
+            var account = (transactionViewModel.Account != null && string.IsNullOrWhiteSpace(transactionViewModel.Account.Uuid))
+                           ? _accountRepository.Get(transactionViewModel.Account.Uuid, transactionViewModel.PropertyUuid)
+                           : null;
 
-            var category = _categoryRepository.Get(transactionViewModel.Category.Uuid,
-                                                   transactionViewModel.PropertyUuid);
+            var category = (transactionViewModel.Category != null && string.IsNullOrWhiteSpace(transactionViewModel.Category.Uuid))
+                ? _categoryRepository.Get(transactionViewModel.Category.Uuid, transactionViewModel.PropertyUuid)
+                : null;
 
             var transaction = _transactionRepository.Get(uuid, transactionViewModel.PropertyUuid);
 
-            transaction.Update(transactionViewModel.Date,
-                               transactionViewModel.Description,
-                               transactionViewModel.Value,
-                               account,
-                               category);
+            if (transaction != null)
+            {
+                transaction.Update(transactionViewModel.Date,
+                                               transactionViewModel.Description,
+                                               transactionViewModel.Value,
+                                               account,
+                                               category);
 
-            _transactionRepository.Update(transaction);
+                _transactionRepository.Update(transaction);
+            }
 
             return Ok();
         }
