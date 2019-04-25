@@ -1,0 +1,5 @@
+.Error {
+    color: salmon;
+    font-weight: bold;
+    text-transform: capitalize;
+}

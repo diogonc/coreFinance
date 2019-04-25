@@ -1,20 +1,26 @@
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import React from 'react';
-import { store, history} from './store';
+import ReactDOM from 'react-dom';
+import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { offline } from '@redux-offline/redux-offline';
+import config from '@redux-offline/redux-offline/lib/config';
 
-import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import 'bulma/css/bulma.css';
+import 'react-bulma-notification/build/css/index.css';
+import App from './App';
+import reducer from './store/reducers';
 
-import App from './components/App';
+const store = createStore(reducer, offline(config))
 
-ReactDOM.render((
+ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route path="/" component={App} />
-      </Switch>
-    </ConnectedRouter>
-  </Provider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
+);
 
-), document.getElementById('root'));
+serviceWorker.unregister();
