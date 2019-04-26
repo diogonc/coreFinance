@@ -14,14 +14,11 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems } from './listItems';
+import ListItems from './listItems';
 
 const drawerWidth = 190;
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
@@ -35,7 +32,6 @@ const styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
-  appBarSpacer: theme.mixins.toolbar,
   menuButton: {
     marginLeft: 10,
     marginRight: 36,
@@ -66,18 +62,12 @@ const styles = theme => ({
       width: theme.spacing.unit * 9,
     },
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: '100vh',
-    overflow: 'auto',
-  },
 });
 
 class Navigation extends React.Component {
   state = {
     anchorEl: null,
-    open: false
+    open: true
   };
 
   handleProfileMenuOpen = event => {
@@ -114,7 +104,7 @@ class Navigation extends React.Component {
     );
 
     return (
-      <div className={classes.root}>
+      <>
         <AppBar
           position="absolute"
           className={classes.appBar}
@@ -169,24 +159,11 @@ class Navigation extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <List>
+            <ListItems />
+          </List>
         </Drawer>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            Orders
-          </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-
-          </Typography>
-          <Typography variant="h4" gutterBottom component="h2">
-            Products
-          </Typography>
-          <div className={classes.tableContainer}>
-
-          </div>
-        </main>
-      </div>
+      </>
     );
   }
 }
