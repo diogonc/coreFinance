@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Navigation from './screens/navigation/';
 import ListGroup from './screens/group/listGroup';
-import NewGroup from './screens/group/newGroup';
 import EditGroup from './screens/group/editGroup';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
@@ -30,7 +29,7 @@ const App = (props) => {
         <div className={classes.appBarSpacer} />
         <div className={[styles.MainContainer, 'container'].join(' ')}>
           <Switch>
-            <Route path="/groups/new" render={() => <NewGroup />} />
+            <Route path="/groups/new" component={EditGroup} />
             <Route path="/groups/edit/:uuid" exact component={EditGroup} />
             <Route path="/groups" exact render={() => <ListGroup />} />
             <Route exact path="/" render={() => <ListGroup />} />
