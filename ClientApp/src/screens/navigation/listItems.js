@@ -9,17 +9,17 @@ import { goTo } from '../../shared/utils';
 
 const ListItems = (props) => (
     <div>
-        <ListItem button>
+        <ListItem button onClick={() => goTo(props, 'groups')}>
             <ListItemIcon>
                 <SpeakerGroup />
             </ListItemIcon>
-            <ListItemText primary="Agrupamentos" onClick={() => goTo(props, 'groups')} />
+            <ListItemText primary="Agrupamentos" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => goTo(props, 'relatorios')}>
             <ListItemIcon>
                 <BarChartIcon />
             </ListItemIcon>
-            <ListItemText primary="Relatórios" onClick={() => goTo(props, 'relatorios')} />
+            <ListItemText primary="Relatórios" />
         </ListItem>
     </div>
 );

@@ -39,6 +39,7 @@ const update = (state, action) => {
 };
 
 const deleteItem = (state, action) => {
+  console.log(action);
   const newList = state.items.filter(item => action.uuid !== item.uuid);
   return { items: newList };
 };

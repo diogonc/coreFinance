@@ -26,8 +26,15 @@ const styles = theme => ({
     cursor: 'pointer',
   },
   fab: {
-    margin: theme.spacing.unit * 2,
-    float: 'right'
+    [theme.breakpoints.down('sm')]: {
+      position: 'absolute',
+      bottom: theme.spacing.unit * 2,
+      right: theme.spacing.unit * 2,
+    },
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing.unit * 2,
+      float: 'right'
+    }
   },
 });
 

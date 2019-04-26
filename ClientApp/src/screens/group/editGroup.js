@@ -6,7 +6,7 @@ import * as actions from '../../store/actions/groupActions';
 import GroupForm from './form/';
 
 const EditGroup = props => {
-  return <GroupForm save={props.update} item={props.item} />;
+  return <GroupForm save={props.update} deleteGroup={props.deleteGroup} item={props.item} />;
 };
 
 const mapStateToProps = state => {
@@ -17,7 +17,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    update: item => dispatch(actions.updateGroup(item))
+    update: item => dispatch(actions.updateGroup(item)),
+    deleteGroup: uuid => dispatch(actions.deleteGroup(uuid))
   };
 };
 

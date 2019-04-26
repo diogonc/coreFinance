@@ -70,6 +70,10 @@ class Navigation extends React.Component {
     open: true
   };
 
+  componentWillMount() {
+    this.setState({ open: window.innerWidth > 600 });
+  }
+
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
