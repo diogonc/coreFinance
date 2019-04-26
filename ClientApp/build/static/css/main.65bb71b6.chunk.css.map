@@ -1,1 +1,0 @@
-{"version":3,"sources":["form.module.css","Validation.module.css"],"names":[],"mappings":"AAAA,yBACI,eACJ,CCFA,yBACI,YAAa,CACb,eAAiB,CACjB,yBACJ","file":"main.65bb71b6.chunk.css","sourcesContent":[".ButtonsArea {\n    margin-top: 10px;\n}",".Error {\n    color: salmon;\n    font-weight: bold;\n    text-transform: capitalize;\n}"]}

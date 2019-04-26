@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import toastr from 'toastr'
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
@@ -36,19 +37,27 @@ const styles = theme => ({
   },
 });
 
-const submitForm = (event, props, group) => {
+const submitForm = (event, props, group, newItem, updateGroup) => {
   event.preventDefault();
   if (group.uuid) {
     props.update(group);
   } else {
     props.add(group);
   }
+  toastr.success(`Group saved!!`)
 
-  props.history.push('/groups');
+  console.log('dddd', newItem)
+  if (!newItem)
+    props.history.push('/groups');
+  else {
+    console.log('aaaa')
+    updateGroup({ uuid: 0, priority: 1, name: '', categoryType: 1 })
+  }
 };
 
 const deleteGroupAction = (props, uuid) => {
   props.deleteGroup(uuid);
+  toastr.success(`Group deleted!!`)
   props.history.push('/groups');
 };
 
@@ -58,26 +67,12 @@ const goToList = (props) => {
 
 const EditGroup = props => {
   const { classes } = props;
-  let item = { uuid: 0, priority: 1, name: '', categoryType: 1 };
-  let deleteButton = '';
-
+  let item = { uuid: 0, priority: 1, name: '', categoryType: 2 };
   let uuid = parseInt(props.match.params.uuid);
   if (uuid) {
     const itemFound = props.items.find(item => item.uuid === uuid);
     if (itemFound) {
       item = itemFound
-
-      deleteButton = (
-        <Button
-          type="button"
-          variant="contained"
-          color="secondary"
-          size="small"
-          className={classes.button}
-          onClick={event => deleteGroupAction(props, group.uuid)}
-        >
-          Excluir
-        </Button>)
     }
     else {
       uuid = null;
@@ -85,12 +80,38 @@ const EditGroup = props => {
   }
   const [group, updateGroup] = useState({ ...item });
 
+  const optionalButton = item.uuid && item.uuid !== 0 ?
+    (
+      <Button
+        type="button"
+        variant="contained"
+        color="secondary"
+        size="small"
+        className={classes.button}
+        onClick={event => deleteGroupAction(props, group.uuid)}
+      >
+        Excluir
+    </Button>)
+    :
+    (
+      <Button
+        type="button"
+        variant="contained"
+        size="small"
+        className={classes.button}
+        onClick={event => submitForm(event, props, group, true, updateGroup)}
+      >
+        Salvar e novo
+          </Button>
+    );
+
+
   return (
     <>
       <Typography component="h1" variant="h5">
         Agrupamento
         </Typography>
-      <form className={classes.form} onSubmit={event => submitForm(event, props, group)}>
+      <form className={classes.form} onSubmit={event => submitForm(event, props, group, false, updateGroup)}>
         <input type="hidden" name="id" value={group.uuid} />
         <FormControl margin="normal" required fullWidth>
           <InputLabel htmlFor="email">Nome</InputLabel>
@@ -135,15 +156,7 @@ const EditGroup = props => {
         >
           Salvar
           </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          size="small"
-          className={classes.button}
-        >
-          Salvar e novo
-          </Button>
-        {deleteButton}
+        {optionalButton}
         <Button
           type="button"
           variant="contained"

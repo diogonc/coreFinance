@@ -1,0 +1,11 @@
+#toast-container>.toast-success {
+    background-color: #35c8c3;
+    opacity:1;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+  }
+  
+  #toast-container>.toast-success:hover {
+    background-color: #35c8c3;
+    opacity:1;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.4);
+  }
