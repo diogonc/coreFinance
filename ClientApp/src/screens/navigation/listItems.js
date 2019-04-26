@@ -5,10 +5,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SpeakerGroup from '@material-ui/icons/SpeakerGroup';
 import BarChartIcon from '@material-ui/icons/BarChart';
-
-const goTo = (props, url) => {
-    props.history.push('/' + url);
-}
+import { goTo } from '../../shared/utils';
 
 const ListItems = (props) => (
     <div>
