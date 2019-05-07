@@ -12,11 +12,11 @@ namespace CoreFinance.Domain.Categories
         public int Priority { get; private set; }
         public Group Group { get; private set; }
 
-        public Category(string propertyUuid, string name, CategoryType categoryType, Group group, int priority)
+        public Category(string propertyUuid, string name, CategoryType categoryType, Group group, int priority, string uuid = null)
         {
             Validate(propertyUuid, name, categoryType, group, priority);
 
-            Uuid = Guid.NewGuid().ToString();
+            Uuid = string.IsNullOrWhiteSpace(uuid) ? Guid.NewGuid().ToString() : uuid;
             PropertyUuid = propertyUuid;
             Name = name;
             Group = group;

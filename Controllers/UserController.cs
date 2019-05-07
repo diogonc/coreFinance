@@ -34,7 +34,11 @@ namespace CoreFinance.Controllers
         public CreatedViewModel Post([FromBody]UserViewModel userViewModel)
         {
             userViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var user = new User(userViewModel.PropertyUuid, userViewModel.Username, userViewModel.Password);
+            var user = new User(userViewModel.PropertyUuid,
+             userViewModel.Username,
+              userViewModel.Password,
+              userViewModel.Uuid);
+
             _userRepository.Create(user);
 
             return new CreatedViewModel(user.Uuid);

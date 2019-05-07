@@ -21,6 +21,16 @@ namespace CoreFinance.DomainTest
             var account = new Account("2342", "name", 3, _owner);
 
             Assert.True(account != null);
+            Assert.NotNull(account.Uuid);
+        }
+
+        [Fact]
+        public void ShouldCreateAnAccountWithUuid()
+        {
+            var uuid = "3232424";
+            var account = new Account("2342", "name", 3, _owner, uuid);
+
+            Assert.Equal(uuid, account.Uuid);
         }
 
         [Fact]

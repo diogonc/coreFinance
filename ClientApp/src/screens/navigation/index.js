@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,6 +15,7 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItems from './listItems';
+import * as actions from '../../store/actions/navigationActions';
 
 const drawerWidth = 190;
 
@@ -64,116 +65,123 @@ const styles = theme => ({
   },
 });
 
-class Navigation extends React.Component {
-  state = {
-    anchorEl: null,
-    open: true
-  };
-
-  componentWillMount() {
-    this.setState({ open: window.innerWidth > 600 });
-  }
-
-  handleProfileMenuOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleMenuClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
-
-  render() {
-    const { anchorEl } = this.state;
-    const { classes } = this.props;
-    const isMenuOpen = Boolean(anchorEl);
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMenuClose}>Minha conta</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>Sair</MenuItem>
-      </Menu>
-    );
-
-    return (
-      <>
-        <AppBar
-          position="absolute"
-          className={classes.appBar}
-        >
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(
-                classes.menuButton,
-                this.state.open && classes.menuButtonHidden,
-              )}
-            >  <MenuIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              aria-label="Close drawer"
-              onClick={this.handleDrawerClose}
-              className={classNames(
-                classes.menuButton,
-                !this.state.open && classes.menuButtonHidden,
-              )}
-            >
-              <ChevronLeftIcon />
-            </IconButton>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              Financeiro
-            </Typography>
-            <IconButton
-              aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-              aria-haspopup="true"
-              onClick={this.handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-
-          </Toolbar>
-        </AppBar>
-        {renderMenu}
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            <ListItems />
-          </List>
-        </Drawer>
-      </>
-    );
-  }
-}
-
-Navigation.propTypes = {
-  classes: PropTypes.object.isRequired,
+const mapStateToProps = state => {
+  return { ...state.navigation };
 };
 
-export default withStyles(styles)(Navigation);
+const mapDispatchToProps = dispatch => {
+  return {
+    toogleNavigation: isMenuExpanded => dispatch(actions.toogleMenu(isMenuExpanded))
+  };
+};
+
+const handleAccountOptionsOpen = (event, updateNavigationState, isMenuExpanded) => {
+  updateNavigationState({ anchorEl: event.currentTarget, isMenuExpanded });
+};
+
+const handleAccountOpionsClose = (updateNavigationState, isMenuExpanded) => {
+  updateNavigationState({ anchorEl: null, isMenuExpanded });
+};
+
+const handleNavigationMenuOpen = (props, updateNavigationState) => {
+  updateNavigationState({ isMenuExpanded: true });
+  props.toogleNavigation(true);
+};
+
+const handleNavigationMenuClose = (props, updateNavigationState) => {
+  updateNavigationState({ isMenuExpanded: false });
+  props.toogleNavigation(false);
+};
+
+const Navigation = props => {
+  const [navigationState, updateNavigationState] = useState({
+    anchorEl: props.anchorEl,
+    isMenuExpanded: props.isMenuExpanded
+  });
+  if (navigationState.isMenuExpanded !== props.isMenuExpanded) {
+    updateNavigationState({ isMenuExpanded: props.isMenuExpanded, anchorEl: props.anchorEl });
+  }
+
+  const { anchorEl, isMenuExpanded } = navigationState;
+  const { classes } = props;
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={Boolean(anchorEl)}
+      onClose={() => handleAccountOpionsClose(updateNavigationState, props.isMenuExpanded)}
+    >
+      <MenuItem onClick={() => handleAccountOpionsClose(updateNavigationState, props.isMenuExpanded)}>Minha conta</MenuItem>
+      <MenuItem onClick={() => handleAccountOpionsClose(updateNavigationState, props.isMenuExpanded)}>Sair</MenuItem>
+    </Menu>
+  );
+
+  return (
+    <>
+      <AppBar
+        position="absolute"
+        className={classes.appBar}
+      >
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={() => handleNavigationMenuOpen(props, updateNavigationState)}
+            className={classNames(
+              classes.menuButton,
+              isMenuExpanded && classes.menuButtonHidden,
+            )}
+          >  <MenuIcon />
+          </IconButton>
+          <IconButton
+            color="inherit"
+            aria-label="Close drawer"
+            onClick={() => handleNavigationMenuClose(props, updateNavigationState)}
+            className={classNames(
+              classes.menuButton,
+              !isMenuExpanded && classes.menuButtonHidden,
+            )}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            Financeiro
+            </Typography>
+          <IconButton
+            aria-owns={isMenuExpanded ? 'material-appbar' : undefined}
+            aria-haspopup="true"
+            onClick={(event) => handleAccountOptionsOpen(event, updateNavigationState, props.isMenuExpanded)}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+
+        </Toolbar>
+      </AppBar>
+      {renderMenu}
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: classNames(classes.drawerPaper, !navigationState.isMenuExpanded && classes.drawerPaperClose),
+        }}
+        open={isMenuExpanded}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={() => handleNavigationMenuClose(props, updateNavigationState)}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          <ListItems />
+        </List>
+      </Drawer>
+    </>
+  );
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Navigation));

@@ -22,6 +22,16 @@ namespace CoreFinance.DomainTest.Categories
             var category = new Category(_propertyUuid, "name", CategoryType.Credit, _group, 3);
 
             Assert.True(category != null);
+            Assert.NotNull(category.Uuid);
+        }
+
+        [Fact]
+        public void ShouldCreateACategoryWithUuid()
+        {
+            var uuid = "24234";
+            var category = new Category(_propertyUuid, "name", CategoryType.Credit, _group, 3, uuid);
+
+            Assert.Equal(uuid, category.Uuid);
         }
 
         [Fact]

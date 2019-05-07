@@ -16,11 +16,11 @@ namespace CoreFinance.Domain
         public Account Account { get; set; }
 
         public Transaction(string propertyUuid, DateTime date, string description, decimal value,
-              Account account, Category category)
+              Account account, Category category, string uuid = null)
         {
             Validate(propertyUuid, date, description, value, account, category);
 
-            Uuid = Guid.NewGuid().ToString();
+            Uuid = string.IsNullOrWhiteSpace(uuid) ? Guid.NewGuid().ToString() : uuid;
             Date = date;
             Description = description;
             Value = value;

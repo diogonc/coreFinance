@@ -54,7 +54,9 @@ namespace CoreFinance.Controllers
                                         categoryViewModel.Name,
                                         (CategoryType)categoryViewModel.CategoryType,
                                         group,
-                                        categoryViewModel.Priority);
+                                        categoryViewModel.Priority,
+                                        categoryViewModel.Uuid);
+
             _categoryRepository.Create(category);
 
             return new CreatedViewModel(category.Uuid);

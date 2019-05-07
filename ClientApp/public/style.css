@@ -1,11 +1,16 @@
+#toast-container {
+    margin-top:10px !important;
+}  
+
 #toast-container>.toast-success {
-    background-color: #35c8c3;
+    background-color: #70B670;
     opacity:1;
     box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+    min-height: 40px
   }
   
   #toast-container>.toast-success:hover {
-    background-color: #35c8c3;
+    background-color: #70B670;
     opacity:1;
     box-shadow:0px 0px 10px rgba(0,0,0,0.4);
   }

@@ -38,7 +38,12 @@ namespace CoreFinance.Controllers
         public CreatedViewModel Post([FromBody]OwnerViewModel ownerViewModel)
         {
             ownerViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var owner = new Owner(ownerViewModel.PropertyUuid, ownerViewModel.UserLogin, ownerViewModel.Name, ownerViewModel.Priority);
+            var owner = new Owner(ownerViewModel.PropertyUuid,
+             ownerViewModel.UserLogin,
+              ownerViewModel.Name,
+               ownerViewModel.Priority,
+               ownerViewModel.Uuid);
+
             _ownerRepository.Create(owner);
 
             return new CreatedViewModel(owner.Uuid);

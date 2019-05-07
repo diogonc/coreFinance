@@ -45,7 +45,11 @@ namespace CoreFinance.Controllers
              ? _ownerRepository.Get(accountViewModel.Owner.Uuid, accountViewModel.PropertyUuid)
              : null;
 
-            var account = new Account(accountViewModel.PropertyUuid, accountViewModel.Name, accountViewModel.Priority, owner);
+            var account = new Account(accountViewModel.PropertyUuid,
+            accountViewModel.Name,
+             accountViewModel.Priority,
+              owner,
+              accountViewModel.Uuid);
             _accountRepository.Create(account);
 
             return new CreatedViewModel(account.Uuid);

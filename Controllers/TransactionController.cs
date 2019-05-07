@@ -55,7 +55,8 @@ namespace CoreFinance.Controllers
                                               transactionViewModel.Description,
                                               transactionViewModel.Value,
                                               account,
-                                              category);
+                                              category,
+                                              transactionViewModel.Uuid);
 
             _transactionRepository.Create(transaction);
             return new CreatedViewModel(transaction.Uuid);

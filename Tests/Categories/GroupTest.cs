@@ -14,6 +14,16 @@ namespace CoreFinance.DomainTest.Categories
             var group = new Group("2342", "name", CategoryType.Credit, 3);
 
             Assert.True(group != null);
+            Assert.NotNull(group.Uuid);
+        }
+
+        [Fact]
+        public void ShouldCreateAGroupWithUuid()
+        {
+            var uuid = "24234";
+            var group = new Group("2342", "name", CategoryType.Credit, 3, uuid);
+
+            Assert.Equal(uuid, group.Uuid);
         }
 
         [Fact]

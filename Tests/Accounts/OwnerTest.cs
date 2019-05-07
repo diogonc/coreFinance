@@ -13,6 +13,17 @@ namespace CoreFinance.DomainTest
             var owner = new Owner("2342", "7", "name", 3);
 
             Assert.True(owner != null);
+            Assert.NotNull(owner.Uuid);
+        }
+
+        [Fact]
+        public void ShouldCreateAnOwnerWithUui()
+        {
+            var uuid = "234234";
+
+            var owner = new Owner("2342", "7", "name", 3, uuid);
+
+            Assert.Equal(uuid, owner.Uuid);
         }
 
         [Fact]

@@ -44,6 +44,7 @@ const mapStateToProps = state => {
   };
 };
 
+
 function SimpleTable(props) {
   const { classes } = props;
 

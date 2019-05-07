@@ -15,7 +15,7 @@ const store = createStore(reducer, offline(config))
 toastr.options = {
   hideDuration: 300,
   timeOut: 1200,
-  positionClass: 'toast-top-right',
+  positionClass: 'toast-top-full-width',
 }
 
 ReactDOM.render(

@@ -40,7 +40,12 @@ namespace CoreFinance.Controllers
         public CreatedViewModel Post([FromBody]GroupViewModel groupViewModel)
         {
             groupViewModel.PropertyUuid = Request.Headers["propertyuuid"];
-            var group = new Group(groupViewModel.PropertyUuid, groupViewModel.Name, (CategoryType)groupViewModel.CategoryType, groupViewModel.Priority);
+            var group = new Group(groupViewModel.PropertyUuid,
+             groupViewModel.Name,
+              (CategoryType)groupViewModel.CategoryType,
+               groupViewModel.Priority,
+               groupViewModel.Uuid);
+
             _groupRepository.Create(group);
 
             return new CreatedViewModel(group.Uuid);

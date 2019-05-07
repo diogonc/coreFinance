@@ -46,11 +46,9 @@ const submitForm = (event, props, group, newItem, updateGroup) => {
   }
   toastr.success(`Group saved!!`)
 
-  console.log('dddd', newItem)
   if (!newItem)
     props.history.push('/groups');
   else {
-    console.log('aaaa')
     updateGroup({ uuid: 0, priority: 1, name: '', categoryType: 1 })
   }
 };
@@ -72,13 +70,16 @@ const EditGroup = props => {
   if (uuid) {
     const itemFound = props.items.find(item => item.uuid === uuid);
     if (itemFound) {
-      item = itemFound
+      item = itemFound;
     }
     else {
       uuid = null;
     }
   }
   const [group, updateGroup] = useState({ ...item });
+  if (item.uuid !== group.uuid) {
+    updateGroup({ ...item });
+  }
 
   const optionalButton = item.uuid && item.uuid !== 0 ?
     (
@@ -108,6 +109,7 @@ const EditGroup = props => {
 
   return (
     <>
+      <div>text</div>
       <Typography component="h1" variant="h5">
         Agrupamento
         </Typography>

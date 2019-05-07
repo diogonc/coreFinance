@@ -11,11 +11,11 @@ namespace CoreFinance.Domain.Accounts
         public string Name { get; set; }
         public int Priority { get; set; }
 
-        public Owner(string propertyUuid, string userLogin, string name, int priority)
+        public Owner(string propertyUuid, string userLogin, string name, int priority, string uuid = null)
         {
             Validate(propertyUuid, userLogin, name, priority);
 
-            Uuid = Guid.NewGuid().ToString();
+            Uuid = string.IsNullOrWhiteSpace(uuid) ? Guid.NewGuid().ToString() : uuid;
             PropertyUuid = propertyUuid;
             UserLogin = userLogin;
             Name = name;

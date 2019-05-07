@@ -21,6 +21,19 @@ namespace CoreFinance.DomainTest
             var transaction = new Transaction(_propertyUuid, DateTime.Today, "description", 10.2m, account, category);
 
             Assert.True(transaction != null);
+            Assert.NotNull(transaction.Uuid);
+        }
+
+        [Fact]
+        public void ShouldCreateATransactionWithUuid()
+        {
+            var uuid = "24234";
+            var account = AccountBuilder.AnAccount().Build();
+            var category = new Category(_propertyUuid, "name", CategoryType.Credit, new Group(_propertyUuid, "group name", CategoryType.Credit, 3), 3);
+
+            var transaction = new Transaction(_propertyUuid, DateTime.Today, "description", 10.2m, account, category, uuid);
+
+            Assert.Equal(uuid, transaction.Uuid);
         }
 
         [Fact]
