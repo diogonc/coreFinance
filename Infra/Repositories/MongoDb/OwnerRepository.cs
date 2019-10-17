@@ -11,11 +11,9 @@ namespace Infra.Repositories
         {
             BsonClassMap.RegisterClassMap<Owner>(cm =>
             {
-                cm.AutoMap();
-                cm.GetMemberMap(a => a.Uuid).SetElementName("uuid");
+                cm.AutoMap();              
                 cm.GetMemberMap(a => a.Name).SetElementName("name");
                 cm.GetMemberMap(a => a.Priority).SetElementName("priority");
-                cm.GetMemberMap(a => a.PropertyUuid).SetElementName("propertyUuid");
                 cm.GetMemberMap(a => a.UserLogin).SetElementName("userLogin");
             });
 

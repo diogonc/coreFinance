@@ -1,8 +1,8 @@
 ﻿namespace CoreFinance.Domain
 {
-    public interface Model
+    public class Model
     {
-        string Uuid { get; }
-        string PropertyUuid { get; }
+        public string Uuid { get; set; }
+        public string PropertyUuid { get; set;}
     }
 }

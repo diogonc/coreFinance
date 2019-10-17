@@ -13,11 +13,9 @@ namespace Infra.Repositories
             BsonClassMap.RegisterClassMap<Group>(cm =>
             {
                 cm.AutoMap();
-                cm.GetMemberMap(a => a.Uuid).SetElementName("uuid");
                 cm.GetMemberMap(a => a.Name).SetElementName("name");
                 cm.GetMemberMap(a => a.CategoryType).SetElementName("categoryType");
                 cm.GetMemberMap(a => a.Priority).SetElementName("priority");
-                cm.GetMemberMap(a => a.PropertyUuid).SetElementName("propertyUuid");
             });
 
             var database = client.GetDatabase("finance");

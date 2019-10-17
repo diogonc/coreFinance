@@ -5,8 +5,6 @@ namespace CoreFinance.Domain.Categories
 {
     public class Group : Model
     {
-        public string Uuid { get; set; }
-        public string PropertyUuid { get; set; }
         public CategoryType CategoryType { get; private set; }
         public string Name { get; set; }
         public int Priority { get; set; }
