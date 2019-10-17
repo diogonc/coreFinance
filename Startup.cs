@@ -55,10 +55,12 @@ namespace CoreFinance
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseCors(builder => builder.WithOrigins("http://localhost:5000", "http://localhost:4200", "https://localhost:5001", "http://diogonc.github.io", "https://diogonc.github.io")
-                                                      .AllowAnyMethod()
-                                                      .WithHeaders("origin", "content-type", "accept", "username",
-                                                                   "token", "propertyUuid")
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                                          .AllowAnyMethod()
+                                          .AllowAnyHeader()
+                        //   WithOrigins("*")
+                        //   .WithHeaders("origin", "content-type", "accept", "username",
+                        //                "token", "propertyUuid")
                         );
 
             app.UseMiddleware<AuthMiddleware>();
