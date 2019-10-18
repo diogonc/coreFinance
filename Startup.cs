@@ -1,5 +1,8 @@
+using System.Net;
+using System.Threading.Tasks;
 using CoreFinance.Filters;
 using CoreFinance.Middleware;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,8 +27,9 @@ namespace CoreFinance
         {
             services.AddMvc(options =>
             {
-                options.Filters.Add(new DomainExceptionFilter());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                // options.Filters.Add(new DomainExceptionFilter());
+            });
+            // .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMongo(Configuration.GetSection("Mongo"));
             services.AddDIConfig();
             services.AddCors();
@@ -35,6 +39,24 @@ namespace CoreFinance
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            // services.ConfigureApplicationCookie(config =>
+            // {
+            //     config.Events = new CookieAuthenticationEvents
+            //     {
+            //         OnRedirectToLogin = ctx => {
+            //             if (ctx.Request.Path.StartsWithSegments("/api"))
+            //             {
+            //                 ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            //             }
+            //             else {
+            //                 ctx.Response.Redirect(ctx.RedirectUri);
+            //             }
+            //             return Task.FromResult(0);
+            //         }
+            //     };
+            // });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,10 +70,8 @@ namespace CoreFinance
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 

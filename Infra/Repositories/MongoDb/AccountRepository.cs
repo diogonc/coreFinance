@@ -11,13 +11,16 @@ namespace Infra.Repositories
     {
         public AccountRepository(MongoClient client)
         {
-            BsonClassMap.RegisterClassMap<Account>(cm =>
+            if (!BsonClassMap.IsClassMapRegistered(typeof(Account)))
             {
-                cm.AutoMap();
-                cm.GetMemberMap(a => a.Name).SetElementName("name");
-                cm.GetMemberMap(a => a.Priority).SetElementName("priority");
-                cm.GetMemberMap(a => a.Owner).SetElementName("owner");
-            });
+                BsonClassMap.RegisterClassMap<Account>(cm =>
+                {
+                    cm.AutoMap();
+                    cm.GetMemberMap(a => a.Name).SetElementName("name");
+                    cm.GetMemberMap(a => a.Priority).SetElementName("priority");
+                    cm.GetMemberMap(a => a.Owner).SetElementName("owner");
+                });
+            }
 
             var database = client.GetDatabase("finance");
             _collection = database.GetCollection<Account>("account");

@@ -10,13 +10,16 @@ namespace Infra.Repositories
     {
         public GroupRepository(MongoClient client)
         {
-            BsonClassMap.RegisterClassMap<Group>(cm =>
+            if (!BsonClassMap.IsClassMapRegistered(typeof(Group)))
             {
-                cm.AutoMap();
-                cm.GetMemberMap(a => a.Name).SetElementName("name");
-                cm.GetMemberMap(a => a.CategoryType).SetElementName("categoryType");
-                cm.GetMemberMap(a => a.Priority).SetElementName("priority");
-            });
+                BsonClassMap.RegisterClassMap<Group>(cm =>
+                {
+                    cm.AutoMap();
+                    cm.GetMemberMap(a => a.Name).SetElementName("name");
+                    cm.GetMemberMap(a => a.CategoryType).SetElementName("categoryType");
+                    cm.GetMemberMap(a => a.Priority).SetElementName("priority");
+                });
+            }
 
             var database = client.GetDatabase("finance");
             _collection = database.GetCollection<Group>("group");

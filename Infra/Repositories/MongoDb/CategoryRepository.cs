@@ -11,17 +11,21 @@ namespace Infra.Repositories
     {
         public CategoryRepository(MongoClient client)
         {
-            BsonClassMap.RegisterClassMap<Category>(cm =>
+            if (!BsonClassMap.IsClassMapRegistered(typeof(Category)))
             {
-                cm.AutoMap();
-                cm.GetMemberMap(c => c.Name).SetElementName("name");
-                cm.GetMemberMap(c => c.CategoryType).SetElementName("categoryType");
-                cm.GetMemberMap(c => c.Priority).SetElementName("priority");
-                cm.GetMemberMap(c => c.Group).SetElementName("group");
-            });
+                BsonClassMap.RegisterClassMap<Category>(cm =>
+                {
+                    cm.AutoMap();
+                    cm.GetMemberMap(c => c.Name).SetElementName("name");
+                    cm.GetMemberMap(c => c.CategoryType).SetElementName("categoryType");
+                    cm.GetMemberMap(c => c.Priority).SetElementName("priority");
+                    cm.GetMemberMap(c => c.Group).SetElementName("group");
+                });
 
-            var database = client.GetDatabase("finance");
-            _collection = database.GetCollection<Category>("category");
+
+                var database = client.GetDatabase("finance");
+                _collection = database.GetCollection<Category>("category");
+            }
         }
 
         public IEnumerable<Category> GetFromGroup(string propertyUuid, string groupUuid)

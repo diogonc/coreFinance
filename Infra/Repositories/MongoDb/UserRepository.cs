@@ -10,19 +10,25 @@ namespace Infra.Repositories
     {
         public UserRepository(MongoClient client)
         {
-            BsonClassMap.RegisterClassMap<Model>(cm =>
+            if (!BsonClassMap.IsClassMapRegistered(typeof(Model)))
             {
-                cm.AutoMap();
-                cm.GetMemberMap(u => u.Uuid).SetElementName("uuid");
-                cm.GetMemberMap(u => u.PropertyUuid).SetElementName("propertyUuid");
-            });
+                BsonClassMap.RegisterClassMap<Model>(cm =>
+                {
+                    cm.AutoMap();
+                    cm.GetMemberMap(u => u.Uuid).SetElementName("uuid");
+                    cm.GetMemberMap(u => u.PropertyUuid).SetElementName("propertyUuid");
+                });
+            }
 
-            BsonClassMap.RegisterClassMap<User>(cm =>
+            if (!BsonClassMap.IsClassMapRegistered(typeof(User)))
             {
-                cm.AutoMap();
-                cm.GetMemberMap(u => u.Username).SetElementName("username");
-                cm.GetMemberMap(u => u.Password).SetElementName("password");
-            });
+                BsonClassMap.RegisterClassMap<User>(cm =>
+                {
+                    cm.AutoMap();
+                    cm.GetMemberMap(u => u.Username).SetElementName("username");
+                    cm.GetMemberMap(u => u.Password).SetElementName("password");
+                });
+            }
 
             var database = client.GetDatabase("finance");
             _collection = database.GetCollection<User>("user");

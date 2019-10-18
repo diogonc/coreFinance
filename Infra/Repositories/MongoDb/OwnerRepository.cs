@@ -9,13 +9,16 @@ namespace Infra.Repositories
     {
         public OwnerRepository(MongoClient client)
         {
-            BsonClassMap.RegisterClassMap<Owner>(cm =>
+            if (!BsonClassMap.IsClassMapRegistered(typeof(Owner)))
             {
-                cm.AutoMap();              
-                cm.GetMemberMap(a => a.Name).SetElementName("name");
-                cm.GetMemberMap(a => a.Priority).SetElementName("priority");
-                cm.GetMemberMap(a => a.UserLogin).SetElementName("userLogin");
-            });
+                BsonClassMap.RegisterClassMap<Owner>(cm =>
+                            {
+                                cm.AutoMap();
+                                cm.GetMemberMap(a => a.Name).SetElementName("name");
+                                cm.GetMemberMap(a => a.Priority).SetElementName("priority");
+                                cm.GetMemberMap(a => a.UserLogin).SetElementName("userLogin");
+                            });
+            }
 
             var database = client.GetDatabase("finance");
             _collection = database.GetCollection<Owner>("owner");
